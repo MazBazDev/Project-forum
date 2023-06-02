@@ -5,7 +5,6 @@
 }
 
 #container-create {
-    border: 1px solid red;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -20,10 +19,17 @@
     flex-direction: column;
     align-items: center;
     width: 35%;
+    gap: 20px;
 }
 
 .create {
     font-size: 25px;
+}
+
+.title-input {
+    color: #777272;
+    font-size: 14px;
+    padding-left: 8px;
 }
 
 .input-pseudo {
