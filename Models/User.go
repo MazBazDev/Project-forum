@@ -1,8 +1,8 @@
 package models
 
 import (
-	"database/sql"
 	"log"
+	database "main/Database"
 
 	_ "github.com/mattn/go-sqlite3" // Import go-sqlite3 library
 )
@@ -10,35 +10,35 @@ import (
 type User struct {
 	Id              int
 	Email           string
-	Password        string
+	Jwt             string
 	Username        string
 	Profile_picture string
 }
 
-// Création de la table user
-func MigrateUsers(Database *sql.DB) {
-	request := `CREATE TABLE user (
-		"id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,		
-		"email" TEXT,
-		"password" TEXT,
-		"username" TEXT,
-		"profile_picture" TEXT DEFAULT "https://visitemaroc.ca/wp-content/uploads/2021/06/profile-placeholder.png"
-	  );`
+func CreateUser(email, password, username, profile_picture string) {
+	request := `INSERT INTO user(email, password, username, profile_picture) VALUES (?, ?, ?, ?)`
 
-	log.Println("> Create user table...")
+	statement, err := database.Database.Prepare(request) // Prepare statement.
 
-	statement, err := Database.Prepare(request) // Prepare SQL Statement
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
+	jwt := 
+	_, err = statement.Exec(email, password, username, profile_picture)
 
+	if err != nil {
+		log.Fatalln(err.Error())
+	}
+}
+
+func EmailExists(email string) bool {
+	query := "SELECT COUNT(*) FROM user WHERE email = ?"
+	var count int
+
+	err := database.Database.QueryRow(query, email).Scan(&count)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 
-	statement.Exec() // Execute SQL Statements
-
-	log.Println("> user table created !")
-}
-
-// Création de fausses donnés pour tests
-func SeedUsers() {
-
+	return count > 0
 }

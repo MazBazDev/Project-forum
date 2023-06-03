@@ -3,7 +3,6 @@ package database
 import (
 	"database/sql"
 	"log"
-	models "main/Models"
 
 	"os"
 
@@ -44,21 +43,31 @@ func Initialize(reset bool) {
 	}
 
 	// Exécuter la migration pour la table "user"
-	models.MigrateUsers(Database)
+	migrateUsers()
 }
 
-func insertStudent(db *sql.DB, code string, name string, program string) {
-	log.Println("Inserting student record ...")
-	insertStudentSQL := `INSERT INTO student(code, name, program) VALUES (?, ?, ?)`
-	statement, err := db.Prepare(insertStudentSQL) // Prepare statement.
-	// This is good to avoid SQL injections
+// Création de la table user
+func migrateUsers() {
+	request := `CREATE TABLE user (
+		"id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,		
+		"email" TEXT,
+		"password" TEXT,
+		"username" TEXT,
+		"jwt" TEXT,
+		"profile_picture" TEXT DEFAULT "https://visitemaroc.ca/wp-content/uploads/2021/06/profile-placeholder.png"
+	  );`
+
+	log.Println("> Create user table...")
+
+	statement, err := Database.Prepare(request) // Prepare SQL Statement
+
 	if err != nil {
-		log.Fatalln(err.Error())
+		log.Fatal(err.Error())
 	}
-	_, err = statement.Exec(code, name, program)
-	if err != nil {
-		log.Fatalln(err.Error())
-	}
+
+	statement.Exec() // Execute SQL Statements
+
+	log.Println("> user table created !")
 }
 
 func displayStudents(db *sql.DB) {
