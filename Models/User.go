@@ -23,7 +23,7 @@ func CreateUser(email, password, username, profile_picture string) {
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
-	jwt := 
+
 	_, err = statement.Exec(email, password, username, profile_picture)
 
 	if err != nil {
