@@ -1,39 +1,67 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
+	"database/sql"
+	"log"
+	controllers "main/Controllers"
+	helpers "main/Helpers"
+	models "main/Models"
 	"main/database"
 	"net/http"
+	"os"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
+	"github.com/go-chi/jwtauth"
+	"github.com/joho/godotenv"
+	_ "github.com/mattn/go-sqlite3"
 )
 
-func main() {
-	database.Initialize(false)
+const (
+	dbPath = "./database/forum.db"
+)
 
-	r := chi.NewRouter()
-	r.Use(middleware.Logger)
-	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("welcome"))
-	})
-	http.ListenAndServe(":3000", r)
+func init() {
+	helpers.LoadEnv()
+
+	// Generate secrete key
+	if len(os.Getenv("SECRETE_KEY")) == 0 {
+		env, _ := godotenv.Unmarshal("SECRETE_KEY=" + helpers.GenerateRandomKey(32))
+		_ = godotenv.Write(env, "./.env")
+
+		log.Println("Secret key set successfully.")
+		helpers.LoadEnv()
+	}
+
+	var err error
+	models.Database, err = sql.Open("sqlite3", dbPath)
+	if err != nil {
+		log.Fatal("Database connection error")
+		return
+	}
 }
 
-func returnError(inCode int, inMessage string) string {
-	type errorData struct {
-		Code    int    `json:"code"`
-		Message string `json:"message"`
-	}
+func main() {
+	//Migrate database
+	database.Migrate()
 
-	reDatas, err := json.Marshal(errorData{
-		Code:    inCode,
-		Message: inMessage,
+	// Initialize JWT authentication
+	models.TokenAuth = jwtauth.New("HS256", []byte(os.Getenv("SECRET_KEY")), nil)
+
+	r := chi.NewRouter()
+
+	r.Use(middleware.Logger)
+
+	r.Post("/register", controllers.Register)
+	r.Post("/login", controllers.Login)
+
+	r.Route("/me", func(r chi.Router) {
+		r.Use(jwtauth.Verifier(models.TokenAuth))
+		r.Use(jwtauth.Authenticator)
+
+		r.Get("/", controllers.Me)
 	})
 
-	if err != nil {
-		fmt.Println(err)
-	}
-	return string(reDatas)
+	log.Println("Server started on :8080")
+	log.Fatal(http.ListenAndServe(":8080", r))
 }
