@@ -2,12 +2,60 @@
 
 * {
     font-family: 'Kodchasan', sans-serif;
+    box-sizing: border-box;
+    outline: none;
+    margin: 0;
+    padding: 0;
 }
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* ------ HEADER ------ */
+
+#container-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #C741E9;
+}
+
+.titleheader {
+    color: white;
+    font-size: 20px;
+    padding-left: 15px;
+}
+
+#container-allbutonheader {
+    display: flex;
+}
+
+#container-buttonlogin {
+    cursor: pointer;
+    background-color: #F3D0FC;
+    width: 120px;
+    height: 30px;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.8rem;
+}
+
+#container-buttonlogin:hover {
+    background-color: #E6B2F4;
+}
+
+/* ------ PAGE CREATE AN ACCOUNT ------ */
 
 #container-create {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
 
 }
 
@@ -59,3 +107,5 @@
 .button:hover {
     background-color: #E084F8;
 }
+
+/* ------ PAGE CREATE AN ACCOUNT ------ */
