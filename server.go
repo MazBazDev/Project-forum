@@ -2,9 +2,12 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 	controllers "main/Controllers"
+	posts "main/Controllers/Posts"
 	helpers "main/Helpers"
+	middlewares "main/Middlewares"
 	models "main/Models"
 	"main/database"
 	"net/http"
@@ -26,7 +29,7 @@ func init() {
 
 	// Generate secrete key
 	if len(os.Getenv("SECRETE_KEY")) == 0 {
-		env, _ := godotenv.Unmarshal("SECRETE_KEY=" + helpers.GenerateRandomKey(32))
+		env, _ := godotenv.Unmarshal("SECRETE_KEY=" + string(helpers.GenerateRandomKey(32)))
 		_ = godotenv.Write(env, "./.env")
 
 		log.Println("Secret key set successfully.")
@@ -46,20 +49,49 @@ func main() {
 	database.Migrate()
 
 	// Initialize JWT authentication
-	models.TokenAuth = jwtauth.New("HS256", []byte(os.Getenv("SECRET_KEY")), nil)
+	models.TokenAuth = jwtauth.New("HS256", []byte(os.Getenv("SECRETE_KEY")), nil)
 
 	r := chi.NewRouter()
 
 	r.Use(middleware.Logger)
 
-	r.Post("/register", controllers.Register)
-	r.Post("/login", controllers.Login)
+	r.Route("/api", func(r chi.Router) {
+		// Public
+		r.Route("/auth", func(r chi.Router) {
+			r.Post("/register", controllers.Register)
+			r.Post("/login", controllers.Login)
+		})
 
-	r.Route("/me", func(r chi.Router) {
-		r.Use(jwtauth.Verifier(models.TokenAuth))
-		r.Use(jwtauth.Authenticator)
+		// Non authentifié
+		r.Route("/posts", func(r chi.Router) {
+			r.Get("/", posts.Index)
+		})
 
-		r.Get("/", controllers.Me)
+		// Private
+		r.Route("/", func(r chi.Router) {
+			r.Use(jwtauth.Verifier(models.TokenAuth))
+			r.Use(jwtauth.Authenticator)
+			r.Use(middlewares.SetUserMail)
+
+			// Profile datas
+			r.Get("/me", controllers.Me)
+
+			r.Route("/post", func(r chi.Router) {
+				r.Post("/", posts.Create)
+
+				r.Route("/{postId}", func(r chi.Router) {
+					r.Use(middlewares.SetPostCtx)
+
+					r.Get("/", posts.Show)      // GET /articles/123
+					r.Delete("/", posts.Delete) // DELETE /articles/123
+				})
+			})
+		})
+	})
+
+	chi.Walk(r, func(method string, route string, handler http.Handler, middlewares ...func(http.Handler) http.Handler) error {
+		fmt.Printf("[%s]: '%s'\n", method, route)
+		return nil
 	})
 
 	log.Println("Server started on :8080")

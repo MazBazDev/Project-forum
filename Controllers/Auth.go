@@ -11,7 +11,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	var credentials models.Credentials
 	err := json.NewDecoder(r.Body).Decode(&credentials)
 	if err != nil {
-		http.Error(w, "Invalid request payload", http.StatusBadRequest)
+		http.Error(w, "Invalid request payload login", http.StatusBadRequest)
 		return
 	}
 
