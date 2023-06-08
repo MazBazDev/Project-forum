@@ -46,7 +46,7 @@ func Create(w http.ResponseWriter, r *http.Request) {
 
 	_, err = models.Database.Exec("INSERT INTO coordinates (post_id, city, lat, long) VALUES (?, ?, ?, ?)", lastId, post.Coordinates.City, post.Coordinates.Lat, post.Coordinates.Long)
 	if err != nil {
-		http.Error(w, "Database insert error 2", http.StatusInternalServerError)
+		http.Error(w, "Database insert error post insert", http.StatusInternalServerError)
 		return
 	}
 
@@ -111,7 +111,7 @@ func GetPostById(id int) (models.Post, error) {
 	comments, err := comments.GetCommentsByPostID(id)
 
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println("Controllers > posts ", err)
 
 		return post, err
 	}

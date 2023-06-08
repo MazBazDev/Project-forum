@@ -17,11 +17,21 @@ func Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, err = models.Database.Exec("INSERT INTO comments (post_id, user_id, content) VALUES (?, ?, ?)", comment.PostId, models.ThisUser.Id, comment.Content)
+	query := `INSERT INTO comments (post_id, user_id, content) VALUES (?, ?, ?)`
+	res, err := models.Database.Exec(query, comment.PostId, models.ThisUser.Id, comment.Content)
 	if err != nil {
 		http.Error(w, "Database insert error", http.StatusInternalServerError)
 		return
 	}
+
+	lastId, _ := res.LastInsertId()
+
+	_, err = models.Database.Exec("INSERT INTO coordinates (comment_id, city, lat, long) VALUES (?, ?, ?, ?)", lastId, comment.Coordinates.City, comment.Coordinates.Lat, comment.Coordinates.Long)
+	if err != nil {
+		http.Error(w, "Database insert error comment insert", http.StatusInternalServerError)
+		return
+	}
+
 	w.WriteHeader(http.StatusOK)
 }
 
@@ -53,11 +63,15 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 func GetCommentsByPostID(postID int) ([]models.Comment, error) {
 	// Déclaration d'une variable pour stocker les commentaires
 	var comments []models.Comment
+	query := `
+		SELECT comments.id, comments.content, comments.created_at, users.id, users.email, users.username, users.profile_picture, c.city, c.lat, c.long 
+		FROM comments
+		INNER JOIN users ON comments.user_id = users.id
+		INNER JOIN coordinates c ON comments.id = c.comment_id
+		WHERE comments.post_id = ?`
 
 	// Exécution de la requête SQL pour récupérer les commentaires
-	rows, err := models.Database.Query(`SELECT comments.id, comments.content, comments.created_at, users.id, users.email, users.username, users.profile_picture FROM comments
-										INNER JOIN users ON comments.user_id = users.id
-										WHERE comments.post_id = ?`, postID)
+	rows, err := models.Database.Query(query, postID)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +80,7 @@ func GetCommentsByPostID(postID int) ([]models.Comment, error) {
 	for rows.Next() {
 		var comment models.Comment
 
-		err := rows.Scan(&comment.Id, &comment.Content, &comment.Created_at, &comment.User.Id, &comment.User.Email, &comment.User.Username, &comment.User.ProfilePicture)
+		err := rows.Scan(&comment.Id, &comment.Content, &comment.Created_at, &comment.User.Id, &comment.User.Email, &comment.User.Username, &comment.User.ProfilePicture, &comment.Coordinates.City, &comment.Coordinates.Lat, &comment.Coordinates.Long)
 		if err != nil {
 			return nil, err
 		}

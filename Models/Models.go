@@ -39,14 +39,15 @@ type Post struct {
 	Content     string      `json:"content"`
 	Created_at  string      `json:"created_at"`
 	User        User        `json:"user"`
-	Comments    []Comment   `json:"comments"`
 	Coordinates Coordinates `json:"coordinates"`
+	Comments    []Comment   `json:"comments"`
 }
 
 type Comment struct {
-	Id         int    `json:"id"`
-	PostId     int    `json:"post_id,omitempty"`
-	Content    string `json:"content"`
-	Created_at string `json:"created_at"`
-	User       User   `json:"user"`
+	Id          int         `json:"id"`
+	PostId      int         `json:"post_id,omitempty"`
+	Content     string      `json:"content"`
+	Created_at  string      `json:"created_at"`
+	User        User        `json:"user"`
+	Coordinates Coordinates `json:"coordinates"`
 }
