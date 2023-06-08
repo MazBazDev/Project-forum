@@ -498,3 +498,52 @@ body {
     flex-direction: column;
     justify-content: center;
 }
+
+#container-replytopic {
+    margin-top: 20px;
+    box-shadow: 5px 5px 5px 5px grey;
+    padding: 15px;
+    width: 70%;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#container-reply {
+    background-color: #f5e4f9;
+    width: 160px;
+    border-radius: 0.3rem;
+    margin-left: 20px;
+    margin-bottom: 8px;
+}
+
+.reply {
+    font-size: 14px;
+    padding-left: 10px;
+}
+
+#container-footerreply {
+    display: flex;
+    align-items: center;
+}
+
+#container-user {
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width : 450px) {
+    #container-footerreply {
+        flex-direction: column;
+    }
+
+    #footer-leftprincipaltopic {
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    #footer-rightprincipaltopic {
+        justify-content: flex-end;
+    }
+}
