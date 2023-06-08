@@ -36,11 +36,20 @@ func Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, err = models.Database.Exec("INSERT INTO posts (content, user_id) VALUES (?, ?)", post.Content, models.ThisUser.Id)
+	res, err := models.Database.Exec("INSERT INTO posts (content, user_id) VALUES (?, ?)", post.Content, models.ThisUser.Id)
 	if err != nil {
-		http.Error(w, "Database insert error", http.StatusInternalServerError)
+		http.Error(w, "Database insert error 1", http.StatusInternalServerError)
 		return
 	}
+
+	lastId, _ := res.LastInsertId()
+
+	_, err = models.Database.Exec("INSERT INTO coordinates (post_id, city, lat, long) VALUES (?, ?, ?, ?)", lastId, post.Coordinates.City, post.Coordinates.Lat, post.Coordinates.Long)
+	if err != nil {
+		http.Error(w, "Database insert error 2", http.StatusInternalServerError)
+		return
+	}
+
 	w.WriteHeader(http.StatusOK)
 }
 
@@ -85,13 +94,17 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 
 func GetPostById(id int) (models.Post, error) {
 	var post models.Post
+	query := `
+		SELECT p.id, p.content, p.created_at,u.id, u.email, u.username, u.profile_picture, c.city, c.lat, c.long 
+		FROM posts p INNER JOIN users u 
+		ON p.user_id = u.id  INNER JOIN coordinates c 
+		ON p.id = c.post_id WHERE p.id = ?
+	`
+	row := models.Database.QueryRow(query, id)
 
-	row := models.Database.QueryRow("SELECT p.id, u.id, u.email, u.username, u.profile_picture, p.content, p.created_at FROM posts p INNER JOIN users u ON p.user_id = u.id WHERE p.id = ?", id)
+	err := row.Scan(&post.Id, &post.Content, &post.Created_at, &post.User.Id, &post.User.Email, &post.User.Username, &post.User.ProfilePicture, &post.Coordinates.City, &post.Coordinates.Lat, &post.Coordinates.Long)
 
-	err := row.Scan(&post.Id, &post.User.Id, &post.User.Email, &post.User.Username, &post.User.ProfilePicture, &post.Content, &post.Created_at)
 	if err != nil {
-		fmt.Println(err)
-
 		return post, err
 	}
 
@@ -108,49 +121,14 @@ func GetPostById(id int) (models.Post, error) {
 	return post, nil
 }
 
-// func GetAllPosts() (models.Posts, error) {
-
-// 	for c := 0; c < 3; c++ {
-// 		fmt.Println("Hello World")
-// 	}
-
-// 	var posts []models.Post
-
-// 	query := `
-// 		SELECT p.id, p.content, p.created_at, u.id, u.email, u.username, u.profile_picture
-// 		FROM posts p
-// 		INNER JOIN users u ON p.user_id = u.id
-// 	`
-// 	rows, err := models.Database.Query(query)
-// 	if err != nil {
-// 		return models.Posts{}, err
-// 	}
-// 	defer rows.Close()
-
-// 	for rows.Next() {
-// 		var post models.Post
-// 		err := rows.Scan(&post.Id, &post.Content, &post.Created_at, &post.User.Id, &post.User.Email, &post.User.Username, &post.User.ProfilePicture)
-// 		if err != nil {
-// 			return models.Posts{}, err
-// 		}
-
-// 		posts = append(posts, post)
-// 	}
-
-// 	if err := rows.Err(); err != nil {
-// 		return models.Posts{}, err
-// 	}
-
-// 	return models.Posts{Posts: posts}, nil
-// }
-
 func GetAllPosts() (models.Posts, error) {
 	var posts []models.Post
 
 	query := `
-		SELECT p.id, p.content, p.created_at, u.id, u.email, u.username, u.profile_picture
-		FROM posts p
-		INNER JOIN users u ON p.user_id = u.id
+		SELECT p.id, p.content, p.created_at,u.id, u.email, u.username, u.profile_picture, c.city, c.lat, c.long 
+		FROM posts p 
+		INNER JOIN users u ON p.user_id = u.id  
+		INNER JOIN coordinates c ON p.id = c.post_id 
 	`
 	rows, err := models.Database.Query(query)
 	if err != nil {
@@ -160,7 +138,8 @@ func GetAllPosts() (models.Posts, error) {
 
 	for rows.Next() {
 		var post models.Post
-		err := rows.Scan(&post.Id, &post.Content, &post.Created_at, &post.User.Id, &post.User.Email, &post.User.Username, &post.User.ProfilePicture)
+		err := rows.Scan(&post.Id, &post.Content, &post.Created_at, &post.User.Id, &post.User.Email, &post.User.Username, &post.User.ProfilePicture, &post.Coordinates.City, &post.Coordinates.Lat, &post.Coordinates.Long)
+
 		if err != nil {
 			return models.Posts{}, err
 		}
@@ -173,9 +152,6 @@ func GetAllPosts() (models.Posts, error) {
 
 		// Mettre à jour les détails du poste avec ceux obtenus de GetPostById
 		post = detailedPost
-		// post.Content = detailedPost.Content
-		// post.Created_at = detailedPost.Created_at
-		// post.User = detailedPost.User
 
 		posts = append(posts, post)
 	}

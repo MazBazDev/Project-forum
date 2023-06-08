@@ -44,4 +44,19 @@ func Migrate() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	_, err = models.Database.Exec(`CREATE TABLE IF NOT EXISTS coordinates (
+		id integer NOT NULL PRIMARY KEY AUTOINCREMENT, 
+		post_id INTEGER,
+		comment_id INTEGER,
+		city TEXT,
+		lat TEXT,
+		long TEXT,
+		FOREIGN KEY (post_id) REFERENCES posts (id)
+		FOREIGN KEY (comment_id) REFERENCES comments (id)
+	)`)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 }

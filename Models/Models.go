@@ -24,16 +24,23 @@ type Credentials struct {
 	Username string `json:"username"`
 }
 
+type Coordinates struct {
+	City string  `json:"city"`
+	Lat  float64 `json:"lat"`
+	Long float64 `json:"long"`
+}
+
 type Posts struct {
 	Posts []Post `json:"posts"`
 }
 
 type Post struct {
-	Id         int       `json:"id"`
-	Content    string    `json:"content"`
-	Created_at string    `json:"created_at"`
-	User       User      `json:"user"`
-	Comments   []Comment `json:"comments"`
+	Id          int         `json:"id"`
+	Content     string      `json:"content"`
+	Created_at  string      `json:"created_at"`
+	User        User        `json:"user"`
+	Comments    []Comment   `json:"comments"`
+	Coordinates Coordinates `json:"coordinates"`
 }
 
 type Comment struct {
