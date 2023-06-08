@@ -231,6 +231,7 @@ body {
     margin-top: 13px;
     display: flex;
     cursor: pointer;
+    align-items: center;
 }
 
 .edit {
