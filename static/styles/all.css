@@ -408,6 +408,7 @@ body {
 
 #container-alltopics {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -463,7 +464,7 @@ body {
 
 #container-icon {
     cursor: pointer;
-    background-color: #C7C5C5;
+    background-color: #EEC1F9;
     border-radius: 0.3rem;
     width: 38px;
     height: 38px;
@@ -474,7 +475,7 @@ body {
 }
 
 #container-icon:hover {
-    background-color: #a4a2a2;
+    background-color: #e5aaf4;
 }
 
 #container-heart {
@@ -485,4 +486,15 @@ body {
 
 #heart {
     cursor: pointer;
+}
+
+#container-secondtopic {
+    margin-top: 20px;
+    box-shadow: 5px 5px 5px 5px grey;
+    padding: 20px;
+    width: 80%;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
