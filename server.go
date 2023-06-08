@@ -30,7 +30,7 @@ func init() {
 
 	// Generate secrete key
 	if len(os.Getenv("SECRETE_KEY")) == 0 {
-		env, _ := godotenv.Unmarshal("SECRETE_KEY=" + string(helpers.GenerateRandomKey(32)))
+		env, _ := godotenv.Unmarshal("SECRETE_KEY=" + helpers.GenerateRandomKey(32))
 		_ = godotenv.Write(env, "./.env")
 
 		log.Println("Secret key set successfully.")
