@@ -409,8 +409,9 @@ body {
 #container-alltopics {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
+    margin-right: 10%;
 }
 
 #container-principaltopic {
@@ -492,18 +493,18 @@ body {
     margin-top: 20px;
     box-shadow: 5px 5px 5px 5px grey;
     padding: 20px;
-    width: 80%;
+    width: 85%;
     border-radius: 2rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
 }
 
 #container-replytopic {
     margin-top: 20px;
     box-shadow: 5px 5px 5px 5px grey;
     padding: 15px;
-    width: 70%;
+    width: 80%;
     border-radius: 2rem;
     display: flex;
     flex-direction: column;
