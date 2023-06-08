@@ -177,4 +177,90 @@ body {
     background-color: #E084F8;
 }
 
-/* ------ PAGE CREATE AN ACCOUNT ------ */
+/* ------ PAGE PROFIL ------ */
+
+#container-pseudo {
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+    justify-content: center;
+}
+
+#container-firstligne {
+    display: flex;
+    width: 30%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pseudo {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.imgprofil {
+    width: 200px;
+}
+
+#container-edit {
+    margin-top: 13px;
+    display: flex;
+    cursor: pointer;
+}
+
+.edit {
+    margin-left: 8px;
+}
+
+#container-secondligne {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 70%;
+}
+
+.textinput {
+    color: #777272;
+    margin-left: 12px;
+}
+
+.input-lignepseudo {
+    background-color: #F1D8F7;
+    border: 1px solid #C741E9;
+    height: 33px;
+    width: 40%;
+    border-radius: 0.8rem;
+    padding-left: 10px;
+}
+
+#container-ligneemail {
+    margin-top: 15px;
+}
+
+.input-ligneemail {
+    background-color: #F1D8F7;
+    border: 1px solid #C741E9;
+    height: 35px;
+    width: 60%;
+    border-radius: 0.8rem;
+    padding-left: 10px;
+}
+
+@media screen and (max-width : 750px) {
+    #container-pseudo {
+        flex-direction: column;
+    }
+}
+
+#container-line {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.line {
+    border: 1px solid black;
+    width: 85%;
+    height: 1px;
+}
