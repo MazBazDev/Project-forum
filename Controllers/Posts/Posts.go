@@ -3,6 +3,7 @@ package posts
 import (
 	"encoding/json"
 	"fmt"
+	comments "main/Controllers/Comments"
 	models "main/Models"
 	"net/http"
 )
@@ -24,6 +25,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	// Écrire la réponse JSON dans la réponse HTTP
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(postsJSON)
+	w.WriteHeader(http.StatusOK)
 }
 
 func Create(w http.ResponseWriter, r *http.Request) {
@@ -39,6 +41,7 @@ func Create(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Database insert error", http.StatusInternalServerError)
 		return
 	}
+	w.WriteHeader(http.StatusOK)
 }
 
 func Show(w http.ResponseWriter, r *http.Request) {
@@ -58,6 +61,7 @@ func Show(w http.ResponseWriter, r *http.Request) {
 	// Écrire la réponse JSON dans la réponse HTTP
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(postJSON)
+	w.WriteHeader(http.StatusOK)
 }
 
 func Delete(w http.ResponseWriter, r *http.Request) {
@@ -90,15 +94,57 @@ func GetPostById(id int) (models.Post, error) {
 
 		return post, err
 	}
+
+	comments, err := comments.GetCommentsByPostID(id)
+
+	if err != nil {
+		fmt.Println(err)
+
+		return post, err
+	}
+
+	post.Comments = comments
+
 	return post, nil
 }
 
+// func GetAllPosts() (models.Posts, error) {
+
+// 	for c := 0; c < 3; c++ {
+// 		fmt.Println("Hello World")
+// 	}
+
+// 	var posts []models.Post
+
+// 	query := `
+// 		SELECT p.id, p.content, p.created_at, u.id, u.email, u.username, u.profile_picture
+// 		FROM posts p
+// 		INNER JOIN users u ON p.user_id = u.id
+// 	`
+// 	rows, err := models.Database.Query(query)
+// 	if err != nil {
+// 		return models.Posts{}, err
+// 	}
+// 	defer rows.Close()
+
+// 	for rows.Next() {
+// 		var post models.Post
+// 		err := rows.Scan(&post.Id, &post.Content, &post.Created_at, &post.User.Id, &post.User.Email, &post.User.Username, &post.User.ProfilePicture)
+// 		if err != nil {
+// 			return models.Posts{}, err
+// 		}
+
+// 		posts = append(posts, post)
+// 	}
+
+// 	if err := rows.Err(); err != nil {
+// 		return models.Posts{}, err
+// 	}
+
+// 	return models.Posts{Posts: posts}, nil
+// }
+
 func GetAllPosts() (models.Posts, error) {
-
-	for c := 0; c < 3; c++ {
-		fmt.Println("Hello World")
-	}
-
 	var posts []models.Post
 
 	query := `
@@ -118,6 +164,18 @@ func GetAllPosts() (models.Posts, error) {
 		if err != nil {
 			return models.Posts{}, err
 		}
+
+		// Utiliser GetPostById pour récupérer les détails supplémentaires du poste
+		detailedPost, err := GetPostById(post.Id)
+		if err != nil {
+			return models.Posts{}, err
+		}
+
+		// Mettre à jour les détails du poste avec ceux obtenus de GetPostById
+		post = detailedPost
+		// post.Content = detailedPost.Content
+		// post.Created_at = detailedPost.Created_at
+		// post.User = detailedPost.User
 
 		posts = append(posts, post)
 	}

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	controllers "main/Controllers"
+	comments "main/Controllers/Comments"
 	posts "main/Controllers/Posts"
 	helpers "main/Helpers"
 	middlewares "main/Middlewares"
@@ -85,6 +86,11 @@ func main() {
 					r.Get("/", posts.Show)      // GET /articles/123
 					r.Delete("/", posts.Delete) // DELETE /articles/123
 				})
+			})
+
+			r.Route("/comment", func(r chi.Router) {
+				r.Post("/", comments.Create)
+				r.Delete("/{commentId}", comments.Delete)
 			})
 		})
 	})

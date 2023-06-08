@@ -13,7 +13,7 @@ var ThisUser User
 type User struct {
 	Id             int    `json:"id"`
 	Email          string `json:"email"`
-	Password       string `json:"password"`
+	Password       string `json:"password,omitempty"`
 	Username       string `json:"username"`
 	ProfilePicture string `json:"profile_picture"`
 }
@@ -29,7 +29,16 @@ type Posts struct {
 }
 
 type Post struct {
+	Id         int       `json:"id"`
+	Content    string    `json:"content"`
+	Created_at string    `json:"created_at"`
+	User       User      `json:"user"`
+	Comments   []Comment `json:"comments"`
+}
+
+type Comment struct {
 	Id         int    `json:"id"`
+	PostId     int    `json:"post_id,omitempty"`
 	Content    string `json:"content"`
 	Created_at string `json:"created_at"`
 	User       User   `json:"user"`
