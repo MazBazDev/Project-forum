@@ -402,3 +402,86 @@ body {
 .posted {
     font-size: 14px;
 }
+
+/* ------ PAGE TOPICS ------ */
+
+#container-alltopics {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#container-principaltopic {
+    margin-top: 20px;
+    box-shadow: 5px 5px 5px 5px grey;
+    padding: 20px;
+    width: 90%;
+    border-radius: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.textprincipaltopic {
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+#container-footerprincipaltopic {
+    display: flex;
+    align-items: center;
+}
+
+#footer-leftprincipaltopic {
+    display: flex;
+    align-items: center;
+}
+
+.imgprofilfooter {
+    width: 50px;
+    margin-right: 10px;
+}
+
+.barre {
+    margin-left: 7px;
+    margin-right: 7px;
+}
+
+#footer-rightprincipaltopic {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.imgheart {
+    width: 20px;
+    cursor: pointer;
+}
+
+
+
+#container-icon {
+    cursor: pointer;
+    background-color: #C7C5C5;
+    border-radius: 0.3rem;
+    width: 38px;
+    height: 38px;
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#container-icon:hover {
+    background-color: #a4a2a2;
+}
+
+#container-heart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#heart {
+    cursor: pointer;
+}
