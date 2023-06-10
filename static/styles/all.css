@@ -179,16 +179,40 @@ body {
 
 /* ------ PAGE PROFIL ------ */
 
+#container-buttonback {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+#container-back {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+}
+
+.imgback {
+    width: 12px;
+    height: 12px;
+}
+
+.textback {
+    margin-left: 3px;
+}
+
+.textback:hover {
+    font-weight: bold;
+}
+
+
 #container-pseudo {
     display: flex;
     align-items: center;
-    margin-top: 40px;
     justify-content: center;
 }
 
 #container-firstligne {
     display: flex;
-    width: 30%;
+    width: 40%;
     flex-direction: column;
     align-items: center;
 }
@@ -207,6 +231,7 @@ body {
     margin-top: 13px;
     display: flex;
     cursor: pointer;
+    align-items: center;
 }
 
 .edit {
@@ -223,9 +248,11 @@ body {
 .textinput {
     color: #777272;
     margin-left: 12px;
+    font-size: 14px;
 }
 
 .input-lignepseudo {
+    margin-top: 5px;
     background-color: #F1D8F7;
     border: 1px solid #C741E9;
     height: 33px;
@@ -239,6 +266,7 @@ body {
 }
 
 .input-ligneemail {
+    margin-top: 5px;
     background-color: #F1D8F7;
     border: 1px solid #C741E9;
     height: 35px;
@@ -251,23 +279,277 @@ body {
     #container-pseudo {
         flex-direction: column;
     }
+
+    #container-secondligne {
+        align-items: center;
+        margin-top: 20px;
+        width: 100%;
+    }
+
+    #container-lignepseudo {
+        width: 60%;
+    }
+
+    .input-lignepseudo {
+        width: 100%;
+    }
+
+    #container-ligneemail {
+        width: 60%;
+    }
+
+    .input-ligneemail {
+        width: 100%;
+    }
 }
 
 #container-line {
     margin-top: 25px;
+    margin-bottom: 25px;
     display: flex;
     justify-content: center;
 }
 
 .line {
     border: 1px solid black;
-    width: 85%;
+    width: 92%;
     height: 1px;
 }
 
-/* Home-page */
 
-.create-new-topic{
+.passwordchange {
+    font-weight: bold;
+    margin-left: 7%;
+    margin-bottom: 20px;
+}
+
+#container-inputpassword {
+    display: flex;
+    justify-content: space-around;
+}
+
+#container-actupassword {
+    width: 25%;
+}
+
+.input-passwordchange {
+    margin-top: 5px;
+    background-color: #F1D8F7;
+    border: 1px solid #C741E9;
+    height: 35px;
+    width: 100%;
+    border-radius: 0.8rem;
+    padding-left: 10px;
+}
+
+#container-buttonconfirm {
+    margin-top: 20px;
+    cursor: pointer;
+    background-color: #E6B2F4;
+    width: 120px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.8rem;
+}
+
+#container-button {
+    display: flex;
+    justify-content: center;
+}
+
+.textconfirm {
+    font-weight: bold;
+}
+
+#container-buttonconfirm:hover {
+    background-color: #dc96ef;
+}
+
+@media screen and (max-width : 750px) {
+    #container-inputpassword {
+        flex-direction: column;
+    }
+
+    #container-inputpassword {
+        align-items: center;
+        width: 100%;
+    }
+
+    #container-actupassword {
+        width: 60%;
+        margin-top: 10px;
+    }
+
+    .input-passwordchange {
+        width: 100%;
+    }
+}
+
+#container-thecommentposted {
+    display: flex;
+    justify-content: center;
+}
+
+#thecommentposted {
+    box-shadow: 5px 5px 5px 5px grey;
+    padding: 12px;
+    width: 90%;
+    border-radius: 0.8rem;
+    margin-bottom: 25px;
+}
+
+.posted {
+    font-size: 14px;
+}
+
+/* ------ PAGE TOPICS ------ */
+
+#container-alltopics {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    margin-right: 10%;
+}
+
+#container-principaltopic {
+    margin-top: 20px;
+    box-shadow: 5px 5px 5px 5px grey;
+    padding: 20px;
+    width: 90%;
+    border-radius: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.textprincipaltopic {
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+#container-footerprincipaltopic {
+    display: flex;
+    align-items: center;
+}
+
+#footer-leftprincipaltopic {
+    display: flex;
+    align-items: center;
+}
+
+.imgprofilfooter {
+    width: 50px;
+    margin-right: 10px;
+}
+
+.barre {
+    margin-left: 7px;
+    margin-right: 7px;
+}
+
+#footer-rightprincipaltopic {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.imgheart {
+    width: 20px;
+    cursor: pointer;
+}
+
+
+
+#container-icon {
+    cursor: pointer;
+    background-color: #EEC1F9;
+    border-radius: 0.3rem;
+    width: 38px;
+    height: 38px;
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#container-icon:hover {
+    background-color: #e5aaf4;
+}
+
+#container-heart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#heart {
+    cursor: pointer;
+}
+
+#container-secondtopic {
+    margin-top: 20px;
+    box-shadow: 5px 5px 5px 5px grey;
+    padding: 20px;
+    width: 85%;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+#container-replytopic {
+    margin-top: 20px;
+    box-shadow: 5px 5px 5px 5px grey;
+    padding: 15px;
+    width: 80%;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#container-reply {
+    background-color: #f5e4f9;
+    width: 160px;
+    border-radius: 0.3rem;
+    margin-left: 20px;
+    margin-bottom: 8px;
+}
+
+.reply {
+    font-size: 14px;
+    padding-left: 10px;
+}
+
+#container-footerreply {
+    display: flex;
+    align-items: center;
+}
+
+#container-user {
+    display: flex;
+    align-items: center;
+}
+
+@media screen and (max-width : 450px) {
+    #container-footerreply {
+        flex-direction: column;
+    }
+
+    #footer-leftprincipaltopic {
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    #footer-rightprincipaltopic {
+        justify-content: flex-end;
+    }
+}
+
+.create-new-topic {
     margin-left: 10%;
     margin-right: 10%;
     margin: 30px;
@@ -276,17 +558,30 @@ body {
     width: 90%;
 }
 
-.search-topic{
+.search-topic {
     border-radius: 20px;
     height: auto;
     width: 500px;
     margin-left: 500px;
 }
 
-.image-home{
+.image-home {
     height: 480px;
     width: 450px;
     margin-left: auto;
     margin-top: 10px;
     border-radius: 10vh;
+    float: left;
+    margin-right: 10px;
+}
+
+#display-topics{
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    margin-right: 10%;
+    transform: scale(0.8);
+    
 }
