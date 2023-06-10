@@ -12,6 +12,9 @@ class Navbar extends React.Component {
           <li>
             <Link to="/login">Login</Link>
           </li>
+          <li>
+            <Link to="/register">Register</Link>
+          </li>
           {/* Ajoutez d'autres liens de navigation ici */}
         </ul>
       </nav>

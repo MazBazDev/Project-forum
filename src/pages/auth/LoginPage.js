@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "../layouts";
+import Layout from "../../layouts";
 
 class LoginPage extends React.Component {
     render() {
