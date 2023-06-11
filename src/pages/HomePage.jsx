@@ -1,5 +1,5 @@
 import React from 'react';
-import Layout from '../layouts';
+import Layout from '../layouts.js';
 import LocatedTopics from '../components/LocatedTopics';
 
 class HomePage extends React.Component {
