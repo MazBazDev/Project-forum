@@ -11,6 +11,7 @@ require (
 
 require (
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.1.0 // indirect
+	github.com/go-chi/cors v1.2.1 // indirect
 	github.com/goccy/go-json v0.10.2 // indirect
 	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/lestrrat-go/backoff/v2 v2.0.8 // indirect
