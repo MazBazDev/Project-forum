@@ -16,8 +16,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var user models.User
-	err = models.Database.QueryRow("SELECT email, password FROM users WHERE email = ?",
-		credentials.Email, credentials.Username).Scan(&user.Email, &user.Password)
+	err = models.Database.QueryRow("SELECT * FROM users WHERE email = ?", credentials.Email).Scan(&user.Id, &user.Email, &user.Password, &user.Username, &user.ProfilePicture)
 
 	if err != nil || !helpers.CheckPasswordHash(credentials.Password, user.Password) {
 		http.Error(w, "Invalid credentials", http.StatusUnauthorized)
@@ -27,8 +26,15 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	// Generate and return JWT token
 	_, tokenString, _ := models.TokenAuth.Encode(map[string]interface{}{"email": user.Email})
 
-	// Return the JWT token
-	json.NewEncoder(w).Encode(map[string]string{"token": tokenString})
+	// Prepare the response
+	response := map[string]interface{}{
+		"token": tokenString,
+		"user":  user,
+	}
+
+	// Return the response as JSON
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
 }
 
 func Register(w http.ResponseWriter, r *http.Request) {
@@ -64,5 +70,14 @@ func Register(w http.ResponseWriter, r *http.Request) {
 
 	// Generate and return JWT token
 	_, tokenString, _ := models.TokenAuth.Encode(map[string]interface{}{"email": user.Email})
-	json.NewEncoder(w).Encode(map[string]string{"token": tokenString})
+
+	// Prepare the response
+	response := map[string]interface{}{
+		"token": tokenString,
+		"user":  user,
+	}
+
+	// Return the response as JSON
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
 }
