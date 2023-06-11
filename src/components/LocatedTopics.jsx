@@ -26,13 +26,18 @@ class LocatedTopics extends React.Component {
   }
 
   render() {
-    const { topics } = this.state; // Récupérer les sujets depuis l'état local
+    let { topics } = this.state; // Récupérer les sujets depuis l'état local
+    if (topics == null) {
+      topics = <h2>Any topics !</h2>
+    } else {
+      topics = topics.map((topic) => (
+        <Topic topic={topic} />
+      ))
+    }
 
     return (
       <div>
-        {topics.map((topic) => (
-            <Topic topic={topic} />
-        ))}
+        {topics}
       </div>
     );
   }
