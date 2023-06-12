@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie'
+import NeedAuth from '../helpers.js';
 
 class Navbar extends React.Component {
   render() {
@@ -11,13 +12,24 @@ class Navbar extends React.Component {
             <Link to="/">Home</Link>
             {Cookies.get("token")}
           </li>
+          
+          <NeedAuth defaults={
           <li>
             <Link to="/login">Login</Link>
           </li>
+          }/>
+
+        <NeedAuth defaults={
           <li>
             <Link to="/register">Register</Link>
           </li>
-          {/* Ajoutez d'autres liens de navigation ici */}
+          }/>
+
+        <NeedAuth auth={
+          <li>
+            <Link to="/logout">Logout</Link>
+          </li>
+          }/>
         </ul>
       </nav>
     );
