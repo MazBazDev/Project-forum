@@ -50,14 +50,14 @@ const Topics = () => {
 
   return (
     <div>
-      {!topics ? (
-        <h2>Any topics!</h2>
-      ) : (
-        topics.map((topic) => (
-          <Topic key={topic.id} topic={topic} onDelete={DeleteTopic} />
-        ))
-      )}
-    </div>
+    {!topics || topics.length === 0 ? (
+      <h2>Any topics!</h2>
+    ) : (
+      topics.map((topic) => (
+        <Topic key={topic.id} topic={topic} onDelete={DeleteTopic} />
+      ))
+    )}
+  </div>
   );
 };
 
