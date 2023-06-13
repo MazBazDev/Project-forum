@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import ReactModal from "react-modal";
 import { GetUser } from "../../helpers";
 
