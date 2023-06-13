@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import ModalTopic from "../pages/topic/ModalTopic";
-import { ProcessContent } from "../helpers";
-const Topic = ({ topic }) => {
+import { GetUser, ProcessContent } from "../helpers";
+const Topic = ({ topic , onDelete}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -26,7 +26,7 @@ const Topic = ({ topic }) => {
 
   return (
     <>
-      {isModalOpen && <ModalTopic topic={topic} closeModal={closeModal} />}
+      {isModalOpen && <ModalTopic topic={topic} closeModal={closeModal} onDelete={onDelete}/>}
 
       <div onClick={openModal}>
         <hr

@@ -4,7 +4,7 @@ import Input from "../../components/Input";
 import axios from "axios";
 import Cookies from 'js-cookie'
 import Notiflix from 'notiflix';
-import {useNavigate } from "react-router-dom";
+import {json, useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -24,6 +24,9 @@ export default function LoginPage() {
       .then(response => {
         const token = response.data.token;
         Cookies.set('token', token, { expires: 7 }); // Le jeton expire dans 7 jours
+        Cookies.set("user", JSON.stringify(response.data.user), {expires: 7});
+
+        console.log(Cookies.get("user"))
         Notiflix.Notify.success(`Welcome back ${response.data.user.username} !`);
         
         navigate("/")

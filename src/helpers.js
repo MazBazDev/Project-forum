@@ -1,5 +1,6 @@
 import React from "react";
 import { isAuthenticated } from ".";
+import Cookies from "js-cookie";
 
 export default function NeedAuth({ auth, defaults }) {  
     if (!isAuthenticated()) {
@@ -16,3 +17,7 @@ export const ProcessContent = (content) => {
   
     return textContent;
 };
+
+export const GetUser = () => {
+  return JSON.parse(Cookies.get("user"))
+}
