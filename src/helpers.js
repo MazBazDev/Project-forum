@@ -21,3 +21,12 @@ export const ProcessContent = (content) => {
 export const GetUser = () => {
   return JSON.parse(Cookies.get("user"))
 }
+
+export const getUserCoordinates = () => {
+  navigator.geolocation.getCurrentPosition((position) => {
+    let lat = position.coords.latitude;
+    let long = position.coords.longitude;
+    
+    return [lat, long]
+  });
+}
