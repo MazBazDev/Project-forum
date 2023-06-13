@@ -38,6 +38,11 @@ export default function CreateTopicPage() {
 			.post("http://localhost:8080/api/post/", {
 				title,
 				content: editorRef.current.getContent(),
+				coordinates : {
+					city: coordinates.city,
+					lat: coordinates.latitude,
+					long:coordinates.longitude 
+				}
 			}, {headers: { Authorization: `Bearer ${Cookies.get("token")}` }})
 			.then((response) => {
 				Notiflix.Notify.success(`Topic created !`);

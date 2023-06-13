@@ -31,7 +31,7 @@ export const getUserCoordinates = async () => {
         const { latitude, longitude } = position.coords;
 
         await getCityName(latitude, longitude).then((city) => {
-          resolve([latitude, longitude, city]);
+          resolve({latitude, longitude, city});
         });
       },
       (error) => {
