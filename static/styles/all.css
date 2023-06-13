@@ -539,7 +539,7 @@ body {
     top: 80%;
     right: 5%;
     transform: translate(0, -50%);
-    width: 40%;
+    width: 30%;
     overflow-y: scroll;
     overflow-x: hidden;
     max-height: calc(100vh - 25%);
@@ -576,26 +576,22 @@ body {
 #city-map {
     width: 400px;
     height: 50px;
-    border: 1px solid #e5aaf4;
     overflow-x: scroll;
-    margin: 15px;
+    margin: 10px;
     white-space: nowrap;
     border-radius: 10px;
 }
 
 #city-map::-webkit-scrollbar {
-    width: 3px;
+    width: 1px;
     border-radius: 10px;
 }
 
 #city-map::-webkit-scrollbar-thumb {
-    background-color: #e5aaf4;
+    background-color: grey;
     border-radius: 10px;
 }
 
-#city-map::-webkit-scrollbar-thumb:hover {
-    background-color: #e5aaf4;
-}
 
 .city {
     margin-left: 5%;
@@ -632,37 +628,3 @@ body {
     }
 }
 
-.view-all-topics {
-    height: 75px;
-    width: 100px;
-    margin-top: 20px;
-    border-radius: 20px;
-    position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        margin-top: 20px;
-}
-
-.view-all-topics {
-    height: 75px;
-    width: 100px;
-    margin-top: 20px;
-    border-radius: 20px;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: 20px;
-}
-
-@media (max-width: 600px) {
-
-    .view-all-topics {
-        width: 80px;
-        height: 60px;
-        margin-top: 10px;
-        border-radius: 15px;
-        font-size: 14px;
-    }
-}
