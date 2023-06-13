@@ -7,12 +7,29 @@
     <link rel="stylesheet" href="/static/styles/all.css">
     <title>HomePage</title>
 </head>
+<div id="container-header">
+    <div id="container-textheader">
+        <div class="titleheader">CiTopics</div>
+    </div>
+    <div id="container-allbutonheader">
+        <div id="container-buttonlogin">
+            <a class="buttonlogin">
+                <div class="textbutton">REGISTER</div>
+            </a>
+        </div>
+        <div id="container-buttonlogin">
+            <a class="buttonlogin">
+                <div class="textbutton">LOGIN</div>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
 <body>
     <button class="create-new-topic">Create a new topic</button>
     <div>
     <input class="search-topic" type="text" placeholder="Search topic, city, categories, user...">
     </div>
-    <img src="/static/images/mapfrance.png" class="image-home">
     
     <div class="all-city">
         <div id="city-map">
@@ -21,6 +38,7 @@
             <button class="city">Marseille</button>
             <button class="city">Lille</button>
             <button class="city">Toulouse</button>
+            <button class="city">Bordeaux</button>
         </div>
     </div>
     
@@ -29,7 +47,7 @@
 
 
     <div id="display-topics">
-    <div id="container-principaltopic">
+    <div id="container-display-topics">
         <div id="container-textprincipaltopic">
             <div class="textprincipaltopic">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -57,7 +75,7 @@
             </div>
         </div>
     </div>
-    <div id="container-principaltopic">
+    <div id="container-display-topics">
         <div id="container-textprincipaltopic">
             <div class="textprincipaltopic">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -85,7 +103,7 @@
             </div>
         </div>
     </div>
-    <div id="container-principaltopic">
+    <div id="container-display-topics">
         <div id="container-textprincipaltopic">
             <div class="textprincipaltopic">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -113,7 +131,11 @@
             </div>
         </div>
     </div>
+        
     </div>
+        <button class="view-all-topics">View all topics</button>
+    </div>
+    
     
     <script src="/html/templates/javascript/index.js"></script>
         

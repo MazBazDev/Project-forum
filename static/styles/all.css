@@ -15,72 +15,8 @@ body {
 }
 
 /* ------ HEADER ------ */
-
 .bar {
     display: none;
-}
-
-@media screen and (max-width : 700px) {
-
-    /* burger */
-    input[type="checkbox"] {
-        -webkit-appearance: none;
-        display: none;
-        visibility: hidden;
-    }
-
-    .bar {
-        display: block;
-        position: absolute;
-        cursor: pointer;
-        width: 40px;
-        height: 25px;
-        left: 1rem;
-        top: 1.5rem;
-    }
-
-    .bar span {
-        position: absolute;
-        width: 38px;
-        height: 4px;
-        background: white;
-        border-radius: 100px;
-        display: inline-block;
-        transition: 0.3s ease;
-        left: 0;
-    }
-
-    .bar span.top {
-        top: 0;
-    }
-
-    .bar span.middle {
-        top: 10px;
-    }
-
-    .bar span.bottom {
-        bottom: 0;
-    }
-
-    input[type]:checked~span.top {
-        transform: rotate(45deg);
-        transform-origin: top left;
-        width: 38px;
-        left: 3px;
-    }
-
-    input[type]:checked~span.bottom {
-        transform: rotate(-45deg);
-        transform-origin: top left;
-        width: 38px;
-        bottom: -5px;
-        box-shadow: 0 0 10px #495057;
-    }
-
-    input[type]:checked~span.middle {
-        transform: translateX(-20px);
-        opacity: 0;
-    }
 }
 
 #container-header {
@@ -116,7 +52,11 @@ body {
     background-color: #E6B2F4;
 }
 
-@media screen and (max-width : 700px) {}
+@media screen and (max-width : 700px) {
+    #container-buttonlogin {
+        width: 100px;
+    }
+}
 
 /* ------ PAGE CREATE AN ACCOUNT ------ */
 
@@ -550,7 +490,7 @@ body {
 }
 
 /* Home page */
-
+ 
 .create-new-topic {
     margin-left: 10%;
     margin-right: 10%;
@@ -572,29 +512,67 @@ body {
     padding: 10px;
 }
 
-.search-topic input[type="text"] {
-    width: 100%;
-    height: 40px;
-    padding: 5px;
-    font-size: 16px;
-}
-.image-home {
-    max-width: 100%;
-    height: auto;
-    margin-left: auto;
-    margin-top: 10px;
-    border-radius: 10vh;
-    float: left;
-    margin-right: 10px;
+@media screen and (max-width: 480px) {
+    .search-topic {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .search-topic {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .search-topic {
+        margin-left: 55%;
+        margin-right: 0;
+    }
+}
 #display-topics {
     position: absolute;
-    top: 25%;
-    right: auto;
-    transform: translateX(50%);
+    top: 80%;
+    right: 5%;
+    transform: translate(0, -50%);
+    width: 40%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: calc(100vh - 25%);
 }
 
+#container-display-topics {
+    margin-top: 20px;
+    box-shadow: 5px 5px 5px 5px grey;
+    padding: 20px;
+    width: 100%;
+    border-radius: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+
+    #display-topics {
+        width: 80%;
+        right: 10%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    #display-topics {
+        width: 100%;
+        right: 0;
+        left: 0;
+        transform: none;
+    }
+}
 #city-map {
     width: 400px;
     height: 50px;
@@ -636,4 +614,55 @@ body {
 .all-city {
     clear: both;
     margin-top: 20px;
+}
+
+@media screen and (max-width: 768px) {
+
+
+    #city-map {
+        width: 100%;
+        height: 80px;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .city {
+        margin: 5px;
+        width: 20%;
+    }
+}
+
+.view-all-topics {
+    height: 75px;
+    width: 100px;
+    margin-top: 20px;
+    border-radius: 20px;
+    position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 20px;
+}
+
+.view-all-topics {
+    height: 75px;
+    width: 100px;
+    margin-top: 20px;
+    border-radius: 20px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+
+    .view-all-topics {
+        width: 80px;
+        height: 60px;
+        margin-top: 10px;
+        border-radius: 15px;
+        font-size: 14px;
+    }
 }
