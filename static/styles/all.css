@@ -24,7 +24,7 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    background-color: #C741E9;
+    background-color: hsl(288, 79%, 58%);
 }
 
 .titleheader {
@@ -47,10 +47,26 @@ body {
     align-items: center;
     justify-content: center;
     border-radius: 0.8rem;
+    display: none;
 }
 
 #container-buttonlogin:hover {
     background-color: #E6B2F4;
+}
+
+#container-textheader {
+    display: flex;
+    align-items: center;
+}
+
+.butonprofil {
+    width: 50px;
+    cursor: pointer;
+}
+
+#container-buttonprofil {
+    display: flex;
+    flex-direction: flex-end;
 }
 
 @media screen and (max-width : 700px) {
@@ -58,6 +74,7 @@ body {
         width: 100px;
     }
 }
+
 
 /* ------ PAGE CREATE AN ACCOUNT ------ */
 
