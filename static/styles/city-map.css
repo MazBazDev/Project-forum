@@ -1,0 +1,95 @@
+#city-map {
+    width: 400px;
+    height: 50px;
+    overflow-x: scroll;
+    margin: 10px;
+    white-space: nowrap;
+    border-radius: 10px;
+    transform: scale(0.8);
+    transform-origin: top left;
+}
+
+#city-map::-webkit-scrollbar {
+    width: 1%;
+    border-radius: 10px;
+}
+
+#city-map::-webkit-scrollbar-thumb {
+    background-color: grey;
+    border-radius: 10px;
+}
+
+.city {
+    margin-left: 2%;
+    margin-right: 2%;
+    border-radius: 10px;
+    height: 25px;
+    width: 90%;
+    width: 100px;
+    height: 30px;
+}
+
+#slideLeft,
+#slideRight {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+}
+
+#slideLeft::before,
+#slideRight::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0%;
+    z-index: -1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+#slideLeft svg,
+#slideRight svg {
+    width: 100%;
+    height: 100%;
+}
+
+.all-city {
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.city,
+#slideLeft,
+#slideRight {
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+}
+
+@media screen and (max-width: 768px) {
+    #city-map {
+        width: 100%;
+        height: 80px;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .city {
+        margin: 5px;
+        width: 20%;
+    }
+}
+
+.button-slider {
+    margin-left: 10%;
+}

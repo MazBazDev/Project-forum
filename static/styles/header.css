@@ -1,0 +1,58 @@
+.bar {
+    display: none;
+}
+
+#container-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: hsl(288, 79%, 58%);
+}
+
+.titleheader {
+    color: white;
+    font-size: 20px;
+    padding-left: 15px;
+}
+
+#container-allbutonheader {
+    display: flex;
+}
+
+#container-buttonlogin {
+    cursor: pointer;
+    background-color: #F3D0FC;
+    width: 120px;
+    height: 30px;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.8rem;
+    display: none;
+}
+
+#container-buttonlogin:hover {
+    background-color: #E6B2F4;
+}
+
+#container-textheader {
+    display: flex;
+    align-items: center;
+}
+
+.butonprofil {
+    width: 50px;
+    cursor: pointer;
+}
+
+#container-buttonprofil {
+    display: flex;
+    flex-direction: flex-end;
+}
+
+@media screen and (max-width : 700px) {
+    #container-buttonlogin {
+        width: 100px;
+    }
+}

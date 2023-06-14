@@ -1,0 +1,80 @@
+#display-topics {
+    position: absolute;
+    top: 80%;
+    right: 5%;
+    transform: translate(0, -50%);
+    width: 30%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: calc(100vh - 25%);
+}
+
+#container-display-topics {
+    margin-top: 20px;
+    box-shadow: 5px 5px 5px 5px grey;
+    padding: 20px;
+    width: 100%;
+    border-radius: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+    #display-topics {
+        width: 80%;
+        right: 10%;
+        left: 10%;
+        /* Ajout de la propriété left pour centrer horizontalement */
+        transform: translate(0, 0);
+        /* Réinitialisation de la transformation */
+        top: 50%;
+        /* Centrage vertical */
+        max-height: 60vh;
+        /* Réduire la hauteur maximale */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #display-topics {
+        width: 100%;
+        right: 0;
+        left: 0;
+        transform: none;
+        top: auto;
+        /* Réinitialisation de la position verticale */
+        max-height: initial;
+        /* Réinitialisation de la hauteur maximale */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #container-display-topics {
+        margin-top: 20px;
+        box-shadow: 5px 5px 5px 5px grey;
+        padding: 20px;
+        width: 80%;
+        right: 10%;
+        left: 10%;
+        /* Ajout de la propriété left pour centrer horizontalement */
+        border-radius: 0.8rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #container-display-topics {
+        margin-top: 20px;
+        box-shadow: 5px 5px 5px 5px grey;
+        padding: 20px;
+        width: 100%;
+        right: 0;
+        left: 0;
+        border-radius: 0.8rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
