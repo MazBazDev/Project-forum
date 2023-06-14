@@ -60,4 +60,15 @@ func Migrate() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	_, err = models.Database.Exec(`CREATE TABLE IF NOT EXISTS views (
+		id integer NOT NULL PRIMARY KEY AUTOINCREMENT, 
+		post_id INTEGER,
+		ip INTEGER,
+		FOREIGN KEY (post_id) REFERENCES posts (id)
+	)`)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 }

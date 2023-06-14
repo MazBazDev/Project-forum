@@ -5,7 +5,11 @@ import (
 	"fmt"
 	comments "main/Controllers/Comments"
 	models "main/Models"
+	"net"
 	"net/http"
+	"strconv"
+
+	"github.com/go-chi/chi"
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -115,6 +119,12 @@ func GetPostById(id int) (models.Post, error) {
 		return post, err
 	}
 
+	// Vérifier si la vue existe déjà
+	var count int = 0
+	_ = models.Database.QueryRow("SELECT COUNT(*) FROM views WHERE post_id = ?", post.Id).Scan(&count)
+
+	post.Views = count
+
 	comments, err := comments.GetCommentsByPostID(id)
 
 	if err != nil {
@@ -151,6 +161,12 @@ func GetAllPosts() (models.Posts, error) {
 			return models.Posts{}, err
 		}
 
+		// Vérifier si la vue existe déjà
+		var count int = 0
+		_ = models.Database.QueryRow("SELECT COUNT(*) FROM views WHERE post_id = ?", post.Id).Scan(&count)
+
+		post.Views = count
+
 		// Utiliser GetPostById pour récupérer les détails supplémentaires du poste
 		detailedPost, err := GetPostById(post.Id)
 		if err != nil {
@@ -168,4 +184,34 @@ func GetAllPosts() (models.Posts, error) {
 	}
 
 	return models.Posts{Posts: posts}, nil
+}
+
+func View(w http.ResponseWriter, r *http.Request) {
+	postID := chi.URLParam(r, "postId")
+	id, _ := strconv.Atoi(postID)
+
+	ip, _, _ := net.SplitHostPort(r.RemoteAddr)
+
+	// Vérifier si la vue existe déjà
+	var count int
+	err := models.Database.QueryRow("SELECT COUNT(*) FROM views WHERE post_id = ? AND ip = ?", id, ip).Scan(&count)
+	if err != nil {
+		http.Error(w, "Database select error", http.StatusInternalServerError)
+		return
+	}
+
+	// Si la vue existe déjà, ne rien faire
+	if count > 0 {
+		w.WriteHeader(http.StatusOK)
+		return
+	}
+
+	// Insérer la vue dans la base de données
+	_, err = models.Database.Exec("INSERT INTO views (post_id, ip) VALUES (?, ?)", id, ip)
+	if err != nil {
+		http.Error(w, "Database insert error", http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
 }

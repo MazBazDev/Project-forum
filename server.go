@@ -78,6 +78,7 @@ func main() {
 		// Non authentifié
 		r.Route("/posts", func(r chi.Router) {
 			r.Get("/", posts.Index)
+			r.Post("/view/{postId}", posts.View)
 		})
 
 		// Private
