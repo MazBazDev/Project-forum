@@ -35,8 +35,9 @@ func Create(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Invalid request payload post", http.StatusBadRequest)
 		return
 	}
+	fmt.Println(post.Title, post.Content, models.ThisUser.Id)
 
-	res, err := models.Database.Exec("INSERT INTO posts (content, user_id) VALUES (?, ?)", post.Content, models.ThisUser.Id)
+	res, err := models.Database.Exec("INSERT INTO posts (title, content, user_id) VALUES (?, ?, ?)", post.Title, post.Content, models.ThisUser.Id)
 	if err != nil {
 		http.Error(w, "Database insert error 1", http.StatusInternalServerError)
 		return
@@ -50,7 +51,13 @@ func Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
+	response := map[string]interface{}{
+		"post_id": lastId,
+	}
+
+	// Return the response as JSON
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
 }
 
 func Show(w http.ResponseWriter, r *http.Request) {
@@ -95,14 +102,14 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 func GetPostById(id int) (models.Post, error) {
 	var post models.Post
 	query := `
-		SELECT p.id, p.content, p.created_at,u.id, u.email, u.username, u.profile_picture, c.city, c.lat, c.long 
+		SELECT p.id, p.title, p.content, p.created_at,u.id, u.email, u.username, u.profile_picture, c.city, c.lat, c.long 
 		FROM posts p INNER JOIN users u 
 		ON p.user_id = u.id  INNER JOIN coordinates c 
 		ON p.id = c.post_id WHERE p.id = ?
 	`
 	row := models.Database.QueryRow(query, id)
 
-	err := row.Scan(&post.Id, &post.Content, &post.Created_at, &post.User.Id, &post.User.Email, &post.User.Username, &post.User.ProfilePicture, &post.Coordinates.City, &post.Coordinates.Lat, &post.Coordinates.Long)
+	err := row.Scan(&post.Id, &post.Title, &post.Content, &post.Created_at, &post.User.Id, &post.User.Email, &post.User.Username, &post.User.ProfilePicture, &post.Coordinates.City, &post.Coordinates.Lat, &post.Coordinates.Long)
 
 	if err != nil {
 		return post, err
@@ -125,7 +132,7 @@ func GetAllPosts() (models.Posts, error) {
 	var posts []models.Post
 
 	query := `
-		SELECT p.id, p.content, p.created_at,u.id, u.email, u.username, u.profile_picture, c.city, c.lat, c.long 
+		SELECT p.id, p.title, p.content, p.created_at,u.id, u.email, u.username, u.profile_picture, c.city, c.lat, c.long 
 		FROM posts p 
 		INNER JOIN users u ON p.user_id = u.id  
 		INNER JOIN coordinates c ON p.id = c.post_id 
@@ -138,7 +145,7 @@ func GetAllPosts() (models.Posts, error) {
 
 	for rows.Next() {
 		var post models.Post
-		err := rows.Scan(&post.Id, &post.Content, &post.Created_at, &post.User.Id, &post.User.Email, &post.User.Username, &post.User.ProfilePicture, &post.Coordinates.City, &post.Coordinates.Lat, &post.Coordinates.Long)
+		err := rows.Scan(&post.Id, &post.Title, &post.Content, &post.Created_at, &post.User.Id, &post.User.Email, &post.User.Username, &post.User.ProfilePicture, &post.Coordinates.City, &post.Coordinates.Lat, &post.Coordinates.Long)
 
 		if err != nil {
 			return models.Posts{}, err

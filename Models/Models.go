@@ -36,6 +36,7 @@ type Posts struct {
 
 type Post struct {
 	Id          int         `json:"id"`
+	Title       string      `json:"title"`
 	Content     string      `json:"content"`
 	Created_at  string      `json:"created_at"`
 	User        User        `json:"user"`

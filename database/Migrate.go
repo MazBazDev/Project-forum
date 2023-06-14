@@ -22,6 +22,7 @@ func Migrate() {
 	_, err = models.Database.Exec(`CREATE TABLE IF NOT EXISTS posts (
 		id integer NOT NULL PRIMARY KEY AUTOINCREMENT, 
 		user_id INTEGER NOT NULL,
+		title TEXT,
 		content TEXT,
 		created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 		FOREIGN KEY (user_id) REFERENCES users (id)
