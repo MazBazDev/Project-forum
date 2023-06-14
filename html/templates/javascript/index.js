@@ -1,9 +1,12 @@
 const buttonRight = document.getElementById("slideRight");
 const buttonLeft = document.getElementById("slideLeft");
 
-buttonRight.onclick = function () {
-  document.getElementById("city-map").scrollLeft += 20;
-};
-buttonLeft.onclick = function () {
-  document.getElementById("city-map").scrollLeft -= 20;
-};
+buttonRight.addEventListener("click", function () {
+  const cityMap = document.getElementById("city-map");
+  cityMap.scrollLeft += 20;
+});
+
+buttonLeft.addEventListener("click", function () {
+  const cityMap = document.getElementById("city-map");
+  cityMap.scrollLeft -= 20;
+});
