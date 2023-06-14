@@ -78,7 +78,13 @@ body {
 
 /* ------ PAGE CREATE AN ACCOUNT ------ */
 
+#container-allcreate {
+    display: flex;
+    margin-top: 50px;
+}
+
 #container-create {
+    width: 48%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -93,12 +99,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 35%;
+    width: 70%;
     gap: 20px;
 }
 
 .create {
+    margin-top: 20px;
     font-size: 25px;
+    justify-content: center;
 }
 
 .title-input {
@@ -131,8 +139,101 @@ body {
 
 }
 
+.textcreate {
+    margin-bottom: 20px;
+    cursor: pointer;
+    color: #777272;
+    font-size: 14px;
+}
+
+.textcreate:hover {
+    color: #4c4949;
+    text-decoration: underline;
+}
+
+.forget {
+    color: #777272;
+    font-size: 10px;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+.forget:hover {
+    color: #0b0a0a;
+    text-decoration: underline;
+}
+
 .button:hover {
     background-color: #E084F8;
+}
+
+#container-othercreate {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#container-creategithub {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 5px 5px 5px 5px grey;
+    padding: 10px;
+    border-radius: 0.8rem;
+    width: 80%;
+    margin-top: 20px;
+    height: 50px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+#container-creategithub:hover {
+    background-color: #fbf1fe;
+}
+
+.textgithub {
+    margin-left: 30px;
+}
+
+@media screen and (min-width : 800px) {
+    #container-create {
+
+        border-right: solid 1px;
+
+    }
+}
+
+@media screen and (max-width : 800px) {
+    #container-allcreate {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #container-create {
+        width: 100%;
+    }
+
+    #container-othercreate {
+        width: 100%;
+    }
+
+    #container-creategithub {
+        width: 70%;
+    }
+
+    .textgithub {
+        margin-left: 10px;
+        font-size: 14px;
+    }
+
+    #container-bar {
+        width: 100%;
+        height: 2%;
+    }
+
 }
 
 /* ------ PAGE PROFIL ------ */
