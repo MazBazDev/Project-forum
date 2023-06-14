@@ -27,9 +27,17 @@
 </div>
 <body>
     <button class="create-new-topic">Create a new topic</button>
-    <div>
-    <input class="search-topic" type="text" placeholder="Search topic, city, categories, user...">
+    <div class="search-container">
+        <input class="search-topic" type="text" placeholder="Search topic, city, categories, user...">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="search-icon">
+            <path
+                d="M24,22.586l-6.262-6.262a10.016,10.016,0,1,0-1.414,1.414L22.586,24ZM10,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,10,18Z" />
+        </svg>
     </div>
+    <div class="title-topics">
+        <h2>Topics at this location</h2>
+    </div>
+
     <div>
         <!-- mettre la carte google maps -->
         <img src="/static/images/mapfrance.png" alt="">
@@ -50,23 +58,26 @@
             <button class="city">Rennes</button>
         </div>
     </div>
-    <button id="slideLeft">
-        <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512">
-            <path
-                d="M19,11H9l3.29-3.29a1,1,0,0,0,0-1.42,1,1,0,0,0-1.41,0l-4.29,4.3A2,2,0,0,0,6,12H6a2,2,0,0,0,.59,1.4l4.29,4.3a1,1,0,1,0,1.41-1.42L9,13H19a1,1,0,0,0,0-2Z" />
-        </svg>
-    </button>
-    <button id="slideRight">
-        <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512">
-            <path
-                d="M18,12h0a2,2,0,0,0-.59-1.4l-4.29-4.3a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42L15,11H5a1,1,0,0,0,0,2H15l-3.29,3.29a1,1,0,0,0,1.41,1.42l4.29-4.3A2,2,0,0,0,18,12Z" />
-        </svg>
-    </button>
+    <div class="button-slider">
+        <button id="slideLeft">
+            <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512">
+                <path
+                    d="M19,11H9l3.29-3.29a1,1,0,0,0,0-1.42,1,1,0,0,0-1.41,0l-4.29,4.3A2,2,0,0,0,6,12H6a2,2,0,0,0,.59,1.4l4.29,4.3a1,1,0,1,0,1.41-1.42L9,13H19a1,1,0,0,0,0-2Z" />
+            </svg>
+        </button>
+        <button id="slideRight">
+            <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512">
+                <path
+                    d="M18,12h0a2,2,0,0,0-.59-1.4l-4.29-4.3a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42L15,11H5a1,1,0,0,0,0,2H15l-3.29,3.29a1,1,0,0,0,1.41,1.42l4.29-4.3A2,2,0,0,0,18,12Z" />
+            </svg>
+        </button>
+        
+    </div>
 
     
-
-
+    
     <div id="display-topics">
+
     <div id="container-display-topics">
         <div id="container-textprincipaltopic">
             <div class="textprincipaltopic">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -130,6 +141,8 @@
             
         </div>
     </div>
+    </div>
+    
     
     
     <script src="/html/templates/javascript/index.js"></script>
