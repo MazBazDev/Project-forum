@@ -43,6 +43,9 @@
     }
 }
 
+
+
+
 @media screen and (max-width: 650px) {
     #display-topics {
         width: 100%;
@@ -83,4 +86,21 @@
         flex-direction: column;
         justify-content: center;
     }
+}
+
+.topic-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.header-text {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.header-svg {
+    left: 400px;
+    height: 24px;
+    fill: black;
 }
