@@ -1,12 +1,12 @@
 #display-topics {
     position: absolute;
-    top: 80%;
+    top: 110%;
     right: 5%;
     transform: translate(0, -50%);
-    width: 30%;
+    width: 45%;
     overflow-y: scroll;
     overflow-x: hidden;
-    max-height: calc(100vh - 25%);
+    max-height: calc(145vh - 25%);
 }
 
 #container-display-topics {
@@ -20,31 +20,38 @@
     justify-content: center;
 }
 
+@media screen and (max-width: 1070px) {
+    #display-topics {
+            width: 80%;
+            right: 10%;
+            left: 10%;
+            transform: translate(0, 0);
+            margin-top: 40%;
+            max-height: auto;
+        }
+}
+
 @media screen and (max-width: 768px) {
     #display-topics {
-        width: 80%;
-        right: 10%;
-        left: 10%;
-        /* Ajout de la propriété left pour centrer horizontalement */
-        transform: translate(0, 0);
-        /* Réinitialisation de la transformation */
-        top: 50%;
-        /* Centrage vertical */
-        max-height: 60vh;
-        /* Réduire la hauteur maximale */
+        width: 100%;
+            right: 0;
+            left: 0;
+            transform: none;
+            top: auto;
+            margin-top: 0%;
+            max-height: initial;
     }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 650px) {
     #display-topics {
         width: 100%;
         right: 0;
         left: 0;
         transform: none;
         top: auto;
-        /* Réinitialisation de la position verticale */
+        margin-top: 0%;
         max-height: initial;
-        /* Réinitialisation de la hauteur maximale */
     }
 }
 
@@ -56,7 +63,6 @@
         width: 80%;
         right: 10%;
         left: 10%;
-        /* Ajout de la propriété left pour centrer horizontalement */
         border-radius: 0.8rem;
         display: flex;
         flex-direction: column;
