@@ -71,4 +71,27 @@ func Migrate() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	_, err = models.Database.Exec(`CREATE TABLE IF NOT EXISTS categories (
+		id integer NOT NULL PRIMARY KEY AUTOINCREMENT, 
+		title TEXT,
+		bg_color TEXT,
+		text_color TEXT
+	)`)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	_, err = models.Database.Exec(`CREATE TABLE IF NOT EXISTS categories_post (
+		id integer NOT NULL PRIMARY KEY AUTOINCREMENT, 
+		post_id INTEGER,
+		categorie_id INTEGER,
+		FOREIGN KEY (post_id) REFERENCES posts (id),
+		FOREIGN KEY (categorie_id) REFERENCES categories (id)
+	)`)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 }

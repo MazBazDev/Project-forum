@@ -3,6 +3,7 @@ package posts
 import (
 	"encoding/json"
 	"fmt"
+	categories "main/Controllers/Categories"
 	comments "main/Controllers/Comments"
 	models "main/Models"
 	"net"
@@ -52,6 +53,14 @@ func Create(w http.ResponseWriter, r *http.Request) {
 	_, err = models.Database.Exec("INSERT INTO coordinates (post_id, city, lat, long) VALUES (?, ?, ?, ?)", lastId, post.Coordinates.City, post.Coordinates.Lat, post.Coordinates.Long)
 	if err != nil {
 		http.Error(w, "Database insert error post insert", http.StatusInternalServerError)
+		return
+	}
+
+	post.Id = int(lastId)
+
+	err = categories.Link(post)
+	if err != nil {
+		http.Error(w, "Database insert error categories insert", http.StatusInternalServerError)
 		return
 	}
 
@@ -106,10 +115,10 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 func GetPostById(id int) (models.Post, error) {
 	var post models.Post
 	query := `
-		SELECT p.id, p.title, p.content, p.created_at,u.id, u.email, u.username, u.profile_picture, c.city, c.lat, c.long 
-		FROM posts p INNER JOIN users u 
-		ON p.user_id = u.id  INNER JOIN coordinates c 
-		ON p.id = c.post_id WHERE p.id = ?
+		SELECT p.id, p.title, p.content, p.created_at,u.id, u.email, u.username, u.profile_picture, c.city, c.lat, c.long
+		FROM posts p 
+		INNER JOIN users u  ON p.user_id = u.id 
+		INNER JOIN coordinates c ON p.id = c.post_id WHERE p.id = ?
 	`
 	row := models.Database.QueryRow(query, id)
 
@@ -134,6 +143,17 @@ func GetPostById(id int) (models.Post, error) {
 	}
 
 	post.Comments = comments
+
+	// Récupérer les catégories du post
+	categories, err := categories.GetCategoriesByPostID(id)
+
+	if err != nil {
+		fmt.Println("Controllers > posts ", err)
+
+		return post, err
+	}
+
+	post.Categories = categories
 
 	return post, nil
 }

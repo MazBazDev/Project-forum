@@ -39,6 +39,7 @@ type Post struct {
 	Title       string      `json:"title"`
 	Content     string      `json:"content"`
 	Created_at  string      `json:"created_at"`
+	Categories  []Caterogy  `json:"categories"`
 	User        User        `json:"user"`
 	Coordinates Coordinates `json:"coordinates"`
 	Comments    []Comment   `json:"comments"`
@@ -58,4 +59,11 @@ type View struct {
 	Id     int `json:"id"`
 	PostId int `json:"post_id"`
 	IP     string
+}
+
+type Caterogy struct {
+	Id         int    `json:"id"`
+	Title      string `json:"title"`
+	Bg_color   string `json:"bg_color"`
+	Text_color string `json:"text_color"`
 }

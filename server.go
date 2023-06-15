@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	controllers "main/Controllers"
+	categories "main/Controllers/Categories"
 	comments "main/Controllers/Comments"
 	posts "main/Controllers/Posts"
 	helpers "main/Helpers"
@@ -99,6 +100,10 @@ func main() {
 					r.Get("/", posts.Show)      // GET /articles/123
 					r.Delete("/", posts.Delete) // DELETE /articles/123
 				})
+			})
+
+			r.Route("/categories", func(r chi.Router) {
+				r.Post("/create", categories.Create)
 			})
 
 			r.Route("/comment", func(r chi.Router) {
