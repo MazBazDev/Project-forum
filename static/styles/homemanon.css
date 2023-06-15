@@ -155,6 +155,7 @@
 #container-topics {
     margin-top: 20px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
@@ -165,4 +166,80 @@
 .titletopics {
     font-size: 18px;
     margin-left: 20px;
+}
+
+
+
+#container-alltopics {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+}
+
+#container-principaltopic {
+    margin-top: 20px;
+    box-shadow: 5px 5px 5px 5px grey;
+    padding: 20px;
+    width: 100%;
+    border-radius: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.textprincipaltopic {
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+#container-footerprincipaltopic {
+    display: flex;
+    align-items: center;
+}
+
+#footer-leftprincipaltopic {
+    display: flex;
+    align-items: center;
+}
+
+.imgprofilfooter {
+    width: 35px;
+    margin-right: 10px;
+}
+
+#container-headerprincipaltopic {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+#container-leftheader {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.rightheader {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.nb {
+    margin-left: 5px;
+}
+
+#footer-leftprincipaltopic {
+    font-size: 13px;
+}
+
+@media screen and (max-width : 750px) {
+    #container-allhome {
+        flex-direction: column;
+    }
+
+    #container-partileft {
+        width: 100%;
+    }
 }
