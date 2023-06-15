@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles/all.css">
+    <link rel="stylesheet" href="/static/styles/search-bar.css">
+    <link rel="stylesheet" href="/static/styles/display-topics.css">
+    <link rel="stylesheet" href="/static/styles/city-map.css">
+    <link rel="stylesheet" href="/static/styles/header.css">
+    <link rel="stylesheet" href="/static/styles/homemanon.css">
+    <script src="https://kit.fontawesome.com/5dea4344fd.js" crossorigin="anonymous"></script>
+    <title>HomePage</title>
+</head>
+<div id="container-header">
+    <div id="container-textheader">
+        <a class="titleheader">CiTopics</a>
+    </div>
+    <div id="container-allbutonheader">
+    </div>
+    <div id="container-buttonprofil">
+        <a href="" class="butonprofil">
+            <img class="butonprofil" src="/static/images/profil.png">
+        </a>
+
+    </div>
+</div>
+</div>
+
+<body>
+    <div id="container-createtopic">
+        <button class="create-new-topic">CREATE A NEW TOPIC</button>
+    </div>
+    <div id="container-allhome">
+        <div id="container-partileft">
+            <div>
+                <img class="imgmap" src="/static/images/mapfrance.png" alt="">
+            </div>
+            <div id="container-carroussel">
+                <div id="all-city">
+                    <div id="city-map">
+                        <button class="city">Paris</button>
+                        <button class="city">Lyon</button>
+                        <button class="city">Marseille</button>
+                        <button class="city">Lille</button>
+                        <button class="city">Toulouse</button>
+                        <button class="city">Nice</button>
+                        <button class="city">Bordeaux</button>
+                        <button class="city">Brest</button>
+                        <button class="city">Dijon</button>
+                        <button class="city">Grenoble</button>
+                        <button class="city">Monaco</button>
+                        <button class="city">Rennes</button>
+                    </div>
+                </div>
+                <div class="button-slider">
+                    <button id="slideLeft">
+                        <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="400"
+                            height="400">
+                            <path
+                                d="M19,11H9l3.29-3.29a1,1,0,0,0,0-1.42,1,1,0,0,0-1.41,0l-4.29,4.3A2,2,0,0,0,6,12H6a2,2,0,0,0,.59,1.4l4.29,4.3a1,1,0,1,0,1.41-1.42L9,13H19a1,1,0,0,0,0-2Z" />
+                        </svg>
+                    </button>
+                    <button id="slideRight">
+                        <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512"
+                            height="512">
+                            <path
+                                d="M18,12h0a2,2,0,0,0-.59-1.4l-4.29-4.3a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42L15,11H5a1,1,0,0,0,0,2H15l-3.29,3.29a1,1,0,0,0,1.41,1.42l4.29-4.3A2,2,0,0,0,18,12Z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="container-partiright">
+            <div id="container-searchbar">
+                <div id="search-bar">
+                    <div id="container-loupe">
+                        <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                    </div>
+                    <input class="searchtopic" type="text" placeholder="Search topic, city, categories, user...">
+                </div>
+            </div>
+            <div id="container-topics">
+                <div id="container-titletopics">
+                    <div class="titletopics">Topics at the location</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/html/templates/javascript/index.js"></script>
+</body>
+
+</html>

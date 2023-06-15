@@ -1,7 +1,4 @@
 #display-topics {
-    position: absolute;
-    top: 110%;
-    right: 5%;
     transform: translate(0, -50%);
     width: 45%;
     overflow-y: scroll;
@@ -22,24 +19,24 @@
 
 @media screen and (max-width: 1070px) {
     #display-topics {
-            width: 80%;
-            right: 10%;
-            left: 10%;
-            transform: translate(0, 0);
-            margin-top: 40%;
-            max-height: auto;
-        }
+        width: 80%;
+        right: 10%;
+        left: 10%;
+        transform: translate(0, 0);
+        margin-top: 40%;
+        max-height: auto;
+    }
 }
 
 @media screen and (max-width: 768px) {
     #display-topics {
         width: 100%;
-            right: 0;
-            left: 0;
-            transform: none;
-            top: auto;
-            margin-top: 0%;
-            max-height: initial;
+        right: 0;
+        left: 0;
+        transform: none;
+        top: auto;
+        margin-top: 0%;
+        max-height: initial;
     }
 }
 

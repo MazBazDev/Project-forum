@@ -445,48 +445,39 @@ body {
     }
 }
 
-/* Home page */
- .create-new-topic {
-    align-items: center;
-    width: 100%;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    padding: 10px;
-    border-radius: 20px;
-    margin-right: 0%;
-    border: none;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    cursor: pointer;
- }
 
 
- .title-topics {
-     margin-left: 60%;
-     margin-top: 10px;
- }
+.title-topics {
+    margin-left: 60%;
+    margin-top: 10px;
+}
 
+
+.button-slider {
+    display: flex;
+    justify-content: center;
+}
 
 @media screen and (max-width : 450px) {
     .title-topics {
-            width: 100%;
-                right: 0;
-                left: 0;
-                transform: none;
-                top: auto;
-                margin-top: 0%;
-                max-height: initial;
-        }
+        width: 100%;
+        right: 0;
+        left: 0;
+        transform: none;
+        top: auto;
+        margin-top: 0%;
+        max-height: initial;
+    }
 }
 
 @media screen and (max-width : 750px) {
     .title-topics {
-            width: 100%;
-                right: 0;
-                left: 0;
-                transform: none;
-                top: auto;
-                margin-top: 0%;
-                max-height: initial;
-        }
+        width: 100%;
+        right: 0;
+        left: 0;
+        transform: none;
+        top: auto;
+        margin-top: 0%;
+        max-height: initial;
+    }
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,156 +26,177 @@
     </div>
 </div>
 </div>
+
 <body>
     <button class="create-new-topic">Create a new topic</button>
-    
-
-    <div>
-        <!-- mettre la carte google maps -->
+    <!-- <div>
         <img src="/static/images/mapfrance.png" alt="">
-    </div>
-    <div class="all-city">
-        <div id="city-map">
-            <button class="city">Paris</button>
-            <button class="city">Lyon</button>
-            <button class="city">Marseille</button>
-            <button class="city">Lille</button>
-            <button class="city">Toulouse</button>
-            <button class="city">Nice</button>
-            <button class="city">Bordeaux</button>
-            <button class="city">Brest</button>
-            <button class="city">Dijon</button>
-            <button class="city">Grenoble</button>
-            <button class="city">Monaco</button>
-            <button class="city">Rennes</button>
-        </div>
-    </div>
-    <div class="button-slider">
-        <button id="slideLeft">
-            <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512">
-                <path
-                    d="M19,11H9l3.29-3.29a1,1,0,0,0,0-1.42,1,1,0,0,0-1.41,0l-4.29,4.3A2,2,0,0,0,6,12H6a2,2,0,0,0,.59,1.4l4.29,4.3a1,1,0,1,0,1.41-1.42L9,13H19a1,1,0,0,0,0-2Z" />
-            </svg>
-        </button>
-        <button id="slideRight">
-            <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512">
-                <path
-                    d="M18,12h0a2,2,0,0,0-.59-1.4l-4.29-4.3a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42L15,11H5a1,1,0,0,0,0,2H15l-3.29,3.29a1,1,0,0,0,1.41,1.42l4.29-4.3A2,2,0,0,0,18,12Z" />
-            </svg>
-        </button>
-        
-    </div>
-
-    <div class="grid2">
-    <div class="search-container">
-        <input class="search-topic" type="text" placeholder="Search topic, city, categories, user...">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="search-icon">
-            <path
-                d="M24,22.586l-6.262-6.262a10.016,10.016,0,1,0-1.414,1.414L22.586,24ZM10,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,10,18Z" />
-        </svg>
-    </div>
-    <div class="title-topics">
-        <h2>Topics at this location</h2>
-    </div>
-    <div id="display-topics">
-
-    
-        <div id="container-display-topics">
-            <div id="container-textprincipaltopic">
-                <div class="topic-header">
-                    <div class="header-text">City - Topic Name</div>
-                    <svg class="header-svg" xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="24"
-                        height="24">
+    </div> -->
+    <div id="container-allhome">
+        <div id="container-carroussel">
+            <div id="all-city">
+                <div id="city-map">
+                    <button class="city">Paris</button>
+                    <button class="city">Lyon</button>
+                    <button class="city">Marseille</button>
+                    <button class="city">Lille</button>
+                    <button class="city">Toulouse</button>
+                    <button class="city">Nice</button>
+                    <button class="city">Bordeaux</button>
+                    <button class="city">Brest</button>
+                    <button class="city">Dijon</button>
+                    <button class="city">Grenoble</button>
+                    <button class="city">Monaco</button>
+                    <button class="city">Rennes</button>
+                </div>
+            </div>
+            <div class="button-slider">
+                <button id="slideLeft">
+                    <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="400" height="512">
                         <path
-                            d="M20,0H4A4,4,0,0,0,0,4V16a4,4,0,0,0,4,4H6.9l4.451,3.763a1,1,0,0,0,1.292,0L17.1,20H20a4,4,0,0,0,4-4V4A4,4,0,0,0,20,0Zm2,16a2,2,0,0,1-2,2H17.1a2,2,0,0,0-1.291.473L12,21.69,8.193,18.473h0A2,2,0,0,0,6.9,18H4a2,2,0,0,1-2-2V4A2,2,0,0,1,4,2H20a2,2,0,0,1,2,2Z" />
-                        <path d="M7,7h5a1,1,0,0,0,0-2H7A1,1,0,0,0,7,7Z" />
-                        <path d="M17,9H7a1,1,0,0,0,0,2H17a1,1,0,0,0,0-2Z" />
-                        <path d="M17,13H7a1,1,0,0,0,0,2H17a1,1,0,0,0,0-2Z" />
+                            d="M19,11H9l3.29-3.29a1,1,0,0,0,0-1.42,1,1,0,0,0-1.41,0l-4.29,4.3A2,2,0,0,0,6,12H6a2,2,0,0,0,.59,1.4l4.29,4.3a1,1,0,1,0,1.41-1.42L9,13H19a1,1,0,0,0,0-2Z" />
                     </svg>
-                </div>
-                <div class="textprincipaltopic">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                    voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum...</div>
-            </div>
-            <div id="container-footerreply">
-                <div id="footer-leftprincipaltopic">
-                    <a id="container-user">
-                        <img src="/static/images/profil.png" class="imgprofilfooter">
-                        <div class="username">UserName</div>
-                    </a>
-                    <div class="barre">|</div>
-                    <div class="date">date</div>
-                </div>
+                </button>
+                <button id="slideRight">
+                    <svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="512" height="512">
+                        <path
+                            d="M18,12h0a2,2,0,0,0-.59-1.4l-4.29-4.3a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42L15,11H5a1,1,0,0,0,0,2H15l-3.29,3.29a1,1,0,0,0,1.41,1.42l4.29-4.3A2,2,0,0,0,18,12Z" />
+                    </svg>
+                </button>
+
             </div>
         </div>
-    
-    <div id="container-display-topics">
-        <div id="container-textprincipaltopic">
-            <div class="topic-header">
-                <div class="header-text">City - Topic Name</div>
-                <svg class="header-svg" xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="24"
-                    height="24">
+
+        <div class="grid2">
+            <div class="search-container">
+                <input class="search-topic" type="text" placeholder="Search topic, city, categories, user...">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="search-icon">
                     <path
-                        d="M20,0H4A4,4,0,0,0,0,4V16a4,4,0,0,0,4,4H6.9l4.451,3.763a1,1,0,0,0,1.292,0L17.1,20H20a4,4,0,0,0,4-4V4A4,4,0,0,0,20,0Zm2,16a2,2,0,0,1-2,2H17.1a2,2,0,0,0-1.291.473L12,21.69,8.193,18.473h0A2,2,0,0,0,6.9,18H4a2,2,0,0,1-2-2V4A2,2,0,0,1,4,2H20a2,2,0,0,1,2,2Z" />
-                    <path d="M7,7h5a1,1,0,0,0,0-2H7A1,1,0,0,0,7,7Z" />
-                    <path d="M17,9H7a1,1,0,0,0,0,2H17a1,1,0,0,0,0-2Z" />
-                    <path d="M17,13H7a1,1,0,0,0,0,2H17a1,1,0,0,0,0-2Z" />
+                        d="M24,22.586l-6.262-6.262a10.016,10.016,0,1,0-1.414,1.414L22.586,24ZM10,18a8,8,0,1,1,8-8A8.009,8.009,0,0,1,10,18Z" />
                 </svg>
             </div>
-            <div class="textprincipaltopic">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum...</div>
-        </div>
-        <div id="container-footerreply">
-            <div id="footer-leftprincipaltopic">
-                <a id="container-user">
-                    <img src="/static/images/profil.png" class="imgprofilfooter">
-                    <div class="username">UserName</div>
-                </a>
-                <div class="barre">|</div>
-                <div class="date">date</div>
+            <div class="title-topics">
+                <h2>Topics at this location</h2>
+            </div>
+            <div id="display-topics">
+
+
+                <div id="container-display-topics">
+                    <div id="container-textprincipaltopic">
+                        <div class="topic-header">
+                            <div class="header-text">City - Topic Name</div>
+                            <svg class="header-svg" xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24"
+                                width="24" height="24">
+                                <path
+                                    d="M20,0H4A4,4,0,0,0,0,4V16a4,4,0,0,0,4,4H6.9l4.451,3.763a1,1,0,0,0,1.292,0L17.1,20H20a4,4,0,0,0,4-4V4A4,4,0,0,0,20,0Zm2,16a2,2,0,0,1-2,2H17.1a2,2,0,0,0-1.291.473L12,21.69,8.193,18.473h0A2,2,0,0,0,6.9,18H4a2,2,0,0,1-2-2V4A2,2,0,0,1,4,2H20a2,2,0,0,1,2,2Z" />
+                                <path d="M7,7h5a1,1,0,0,0,0-2H7A1,1,0,0,0,7,7Z" />
+                                <path d="M17,9H7a1,1,0,0,0,0,2H17a1,1,0,0,0,0-2Z" />
+                                <path d="M17,13H7a1,1,0,0,0,0,2H17a1,1,0,0,0,0-2Z" />
+                            </svg>
+                        </div>
+                        <div class="textprincipaltopic">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                            eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                            exercitation
+                            ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                            reprehenderit
+                            in
+                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat
+                            non
+                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum...</div>
+                    </div>
+                    <div id="container-footerreply">
+                        <div id="footer-leftprincipaltopic">
+                            <a id="container-user">
+                                <img src="/static/images/profil.png" class="imgprofilfooter">
+                                <div class="username">UserName</div>
+                            </a>
+                            <div class="barre">|</div>
+                            <div class="date">date</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="container-display-topics">
+                    <div id="container-textprincipaltopic">
+                        <div class="topic-header">
+                            <div class="header-text">City - Topic Name</div>
+                            <svg class="header-svg" xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24"
+                                width="24" height="24">
+                                <path
+                                    d="M20,0H4A4,4,0,0,0,0,4V16a4,4,0,0,0,4,4H6.9l4.451,3.763a1,1,0,0,0,1.292,0L17.1,20H20a4,4,0,0,0,4-4V4A4,4,0,0,0,20,0Zm2,16a2,2,0,0,1-2,2H17.1a2,2,0,0,0-1.291.473L12,21.69,8.193,18.473h0A2,2,0,0,0,6.9,18H4a2,2,0,0,1-2-2V4A2,2,0,0,1,4,2H20a2,2,0,0,1,2,2Z" />
+                                <path d="M7,7h5a1,1,0,0,0,0-2H7A1,1,0,0,0,7,7Z" />
+                                <path d="M17,9H7a1,1,0,0,0,0,2H17a1,1,0,0,0,0-2Z" />
+                                <path d="M17,13H7a1,1,0,0,0,0,2H17a1,1,0,0,0,0-2Z" />
+                            </svg>
+                        </div>
+                        <div class="textprincipaltopic">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                            eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                            exercitation
+                            ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                            reprehenderit
+                            in
+                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat
+                            non
+                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum...</div>
+                    </div>
+                    <div id="container-footerreply">
+                        <div id="footer-leftprincipaltopic">
+                            <a id="container-user">
+                                <img src="/static/images/profil.png" class="imgprofilfooter">
+                                <div class="username">UserName</div>
+                            </a>
+                            <div class="barre">|</div>
+                            <div class="date">date</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="container-display-topics">
+                    <div id="container-textprincipaltopic">
+                        <div class="topic-header">
+                            <div class="header-text">City - Topic Name</div>
+                            <svg class="header-svg" xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24"
+                                width="24" height="24">
+                                <path
+                                    d="M20,0H4A4,4,0,0,0,0,4V16a4,4,0,0,0,4,4H6.9l4.451,3.763a1,1,0,0,0,1.292,0L17.1,20H20a4,4,0,0,0,4-4V4A4,4,0,0,0,20,0Zm2,16a2,2,0,0,1-2,2H17.1a2,2,0,0,0-1.291.473L12,21.69,8.193,18.473h0A2,2,0,0,0,6.9,18H4a2,2,0,0,1-2-2V4A2,2,0,0,1,4,2H20a2,2,0,0,1,2,2Z" />
+                                <path d="M7,7h5a1,1,0,0,0,0-2H7A1,1,0,0,0,7,7Z" />
+                                <path d="M17,9H7a1,1,0,0,0,0,2H17a1,1,0,0,0,0-2Z" />
+                                <path d="M17,13H7a1,1,0,0,0,0,2H17a1,1,0,0,0,0-2Z" />
+                            </svg>
+                        </div>
+                        <div class="textprincipaltopic">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                            eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                            exercitation
+                            ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                            reprehenderit
+                            in
+                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat
+                            non
+                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum...</div>
+                    </div>
+                    <div id="container-footerreply">
+                        <div id="footer-leftprincipaltopic">
+                            <a id="container-user">
+                                <img src="/static/images/profil.png" class="imgprofilfooter">
+                                <div class="username">UserName</div>
+                            </a>
+                            <div class="barre">|</div>
+                            <div class="date">date</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div id="container-display-topics">
-        <div id="container-textprincipaltopic">
-            <div class="topic-header">
-                <div class="header-text">City - Topic Name</div>
-                <svg class="header-svg" xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="24"
-                    height="24">
-                    <path
-                        d="M20,0H4A4,4,0,0,0,0,4V16a4,4,0,0,0,4,4H6.9l4.451,3.763a1,1,0,0,0,1.292,0L17.1,20H20a4,4,0,0,0,4-4V4A4,4,0,0,0,20,0Zm2,16a2,2,0,0,1-2,2H17.1a2,2,0,0,0-1.291.473L12,21.69,8.193,18.473h0A2,2,0,0,0,6.9,18H4a2,2,0,0,1-2-2V4A2,2,0,0,1,4,2H20a2,2,0,0,1,2,2Z" />
-                    <path d="M7,7h5a1,1,0,0,0,0-2H7A1,1,0,0,0,7,7Z" />
-                    <path d="M17,9H7a1,1,0,0,0,0,2H17a1,1,0,0,0,0-2Z" />
-                    <path d="M17,13H7a1,1,0,0,0,0,2H17a1,1,0,0,0,0-2Z" />
-                </svg>
-            </div>
-            <div class="textprincipaltopic">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum...</div>
-        </div>
-        <div id="container-footerreply">
-            <div id="footer-leftprincipaltopic">
-                <a id="container-user">
-                    <img src="/static/images/profil.png" class="imgprofilfooter">
-                    <div class="username">UserName</div>
-                </a>
-                <div class="barre">|</div>
-                <div class="date">date</div>
-            </div>
-        </div>
-    </div>
-    </div>
-    </div>
-    
-    
+
+
     <script src="/html/templates/javascript/index.js"></script>
-        
+
 </body>
+
 </html>

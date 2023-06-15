@@ -8,7 +8,6 @@
      background-color: #fff;
      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
      margin-right: 10%;
-     margin-top: -50%;
  }
 
  .search-topic {
@@ -28,40 +27,40 @@
      margin-right: 8px;
  }
 
-@media screen and (max-width: 480px) {
-    .search-topic {
-        max-width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: left;
-    }
+ @media screen and (max-width: 480px) {
+     .search-topic {
+         max-width: 100%;
+         margin-left: auto;
+         margin-right: auto;
+         text-align: left;
+     }
 
-    .search-icon {
-        margin-right: 5px;
-    }
-}
+     .search-icon {
+         margin-right: 5px;
+     }
+ }
 
 
-@media screen and (min-width: 481px) and (max-width: 768px) {
-    .search-topic {
-        margin-left: auto;
-        margin-right: auto;
-        text-align: left;
-    }
+ @media screen and (min-width: 481px) and (max-width: 768px) {
+     .search-topic {
+         margin-left: auto;
+         margin-right: auto;
+         text-align: left;
+     }
 
-    .search-icon {
-        margin-right: 5px;
-    }
-}
+     .search-icon {
+         margin-right: 5px;
+     }
+ }
 
-@media screen and (min-width: 769px) {
-    .search-topic {
-        margin-left: 0;
-        margin-right: 0;
-        text-align: left;
-    }
+ @media screen and (min-width: 769px) {
+     .search-topic {
+         margin-left: 0;
+         margin-right: 0;
+         text-align: left;
+     }
 
-    .search-icon {
-        margin-right: 8px;
-    }
-}
+     .search-icon {
+         margin-right: 8px;
+     }
+ }
