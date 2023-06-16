@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import ModalTopic from "../pages/topic/ModalTopic";
-import { GetUser, ProcessContent } from "../helpers";
+import { ProcessContent } from "../helpers";
 const Topic = ({ topic , onDelete}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 

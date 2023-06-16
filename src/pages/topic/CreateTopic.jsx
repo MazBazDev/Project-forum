@@ -6,6 +6,7 @@ import axios from "axios";
 import {useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { getUserCoordinates } from "../../helpers";
+import CustomSelect from "../../components/CategoriesInput";
 
 export default function CreateTopicPage() {
     const navigate = useNavigate();
@@ -85,8 +86,8 @@ export default function CreateTopicPage() {
 						"body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
 				}}
 			/>
-			
-				<button type="submit" disabled={canSubmit ? false: true}>Create topic !</button>
+			<CustomSelect/>
+			<button type="submit" disabled={canSubmit ? false: true}>Create topic !</button>
 		</form>
 	);
 }
