@@ -1,5 +1,6 @@
 import ReactModal from "react-modal";
 import { GetUser } from "../../helpers";
+import NeedAuth from "../../helpers";
 
 const ModalTopic = ({ topic, closeModal, onDelete }) => {
 	const DeleteTopic = () => {
@@ -21,7 +22,9 @@ const ModalTopic = ({ topic, closeModal, onDelete }) => {
 			onRequestClose={closeModal}
 		>
 			<p>{`Topic numéro : ${topic.id}`}</p>
-			<DeleteTopic />
+			
+			<NeedAuth auth={<DeleteTopic />}/>
+
 			<div dangerouslySetInnerHTML={{ __html: topic.content }} />
 		</ReactModal>
 	);
