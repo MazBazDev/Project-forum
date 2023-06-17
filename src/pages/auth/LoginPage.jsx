@@ -4,7 +4,7 @@ import Input from "../../components/Input";
 import axios from "axios";
 import Cookies from 'js-cookie'
 import Notiflix from 'notiflix';
-import {json, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const navigate = useNavigate();
