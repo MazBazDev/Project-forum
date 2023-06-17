@@ -26,7 +26,6 @@ export default function LoginPage() {
         Cookies.set('token', token, { expires: 7 }); // Le jeton expire dans 7 jours
         Cookies.set("user", JSON.stringify(response.data.user), {expires: 7});
 
-        console.log(Cookies.get("user"))
         Notiflix.Notify.success(`Welcome back ${response.data.user.username} !`);
         
         navigate("/")
