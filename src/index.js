@@ -7,7 +7,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import Cookies from 'js-cookie';
 import Notiflix from 'notiflix';
-import CreateTopicPage from './pages/topic/CreateTopic';
+import CreateTopicPage from './pages/topic/CreateTopicModal';
 
 export const isAuthenticated = () => {
   const token = Cookies.get("token");
@@ -58,7 +58,6 @@ ReactDOM.render(
         <Route path="/register" element={<OnlyPublicRoute element={<RegisterPage />} />} />
 
         <Route path="/logout" element={<Logout/>} />
-        <Route path="/topic/create" element={<PrivateRoute element={<CreateTopicPage />} />} />
       </Routes>
     </Router>
   </React.StrictMode>,
