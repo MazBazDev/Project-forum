@@ -58,8 +58,7 @@ export default function CreateTopicModal({onClose, isModalOpen}) {
 			}, {headers: { Authorization: `Bearer ${Cookies.get("token")}` }})
 			.then((response) => {
 				Notiflix.Notify.success(`Topic created !`);
-
-				navigate("/");
+				onClose()
 			})
 			.catch((error) => {
 				Notiflix.Notify.failure(error.response.data);

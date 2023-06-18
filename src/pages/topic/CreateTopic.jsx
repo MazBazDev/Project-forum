@@ -1,7 +1,7 @@
 import React , { useState, useEffect }from "react";
 import CreateTopicModal from "./CreateTopicModal";
 
-export default function CreateTopic() {
+export default function CreateTopic({updateTopics}) {
     
     const [isModalOpen, setIsModalOpen] = useState(false);
     const openModal = () => {
@@ -9,6 +9,7 @@ export default function CreateTopic() {
     };
 
     const closeModal = () => {
+        updateTopics()
         setIsModalOpen(false);
     };
 
@@ -23,7 +24,7 @@ export default function CreateTopic() {
     return (
         <>
             {isModalOpen && <CreateTopicModal onClose={closeModal} isModalOpen={isModalOpen}/>}
-            <p onClick={openModal}>Create Topic</p>
+            <button onClick={openModal}>Create Topic</button>
         </>
       );
 }
