@@ -38,7 +38,7 @@ export default function Comment({ comment, updateTopic }) {
 			) : ("")}
 			<br />
 			<UserProfile user={comment.user} />
-			<span> | {moment(comment.created_at).fromNow()}</span>
+			<span> | {comment.coordinates.city } | {moment(comment.created_at).fromNow()}</span>
 		</>
 	);
 }
