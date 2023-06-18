@@ -46,15 +46,16 @@ const Topic = ({ topic , updateTopics}) => {
             {topic.comments === null ? 0 : topic.comments.length} comment(s)
           </p>
           <p>{topic.views} view(s)</p>
+          {topic.categories != null  && topic.categories.map((elem) => {
+            return <span>{elem.title}</span>
+          })}
           <p>
-            <a>
-              <img
+            <img
                 style={{ width: "50px" }}
                 src={topic.user.profile_picture}
                 alt="User Profile"
               />
               {topic.user.username}
-            </a>{" "}
             | {timeAgo}
           </p>
         </div>
