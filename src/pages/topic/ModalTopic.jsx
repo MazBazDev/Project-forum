@@ -82,13 +82,14 @@ const ModalTopic = ({ topicId, closeModal, updateTopics }) => {
 						return <span>{elem.title}</span>
 					})}
 					<p>Commentaires</p>
-					{topic.comment != null && topic.comments.map((elem) => {
+					<CreateCommentModal updateTopic={refreshTopicDatas} topic_id={topicId}/>
+					
+					{topic.comments != null && topic.comments.map((elem) => {
 						return (
 							<Comment comment={elem} updateTopic={refreshTopicDatas}/>
 						);
 					})}
 
-					<CreateCommentModal updateTopic={refreshTopicDatas} topic_id={topicId}/>
 				</>
 			)}
 		</ReactModal>
