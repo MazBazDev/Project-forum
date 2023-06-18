@@ -4,9 +4,11 @@ import NeedAuth from "../helpers.js";
 import CreateTopic from "./topic/CreateTopic.jsx";
 import axios from "axios";
 import Topic from "../../src/components/Topic";
+import MapComponent from "../components/MapComponent.jsx";
 
 function HomePage() {
 	const [topics, setTopics] = useState([]);
+	const [locatedTopics, setLocatedTopics] = useState([])
 
 	useEffect(() => {
 		getTopics();
@@ -30,12 +32,12 @@ function HomePage() {
 				auth={<CreateTopic updateTopics={getTopics} />}
 				defaults={<a href="/login">You need to be logged</a>}
 			/>
-
+			<MapComponent topics={topics} setLocatedTopics={setLocatedTopics} locatedTopics={locatedTopics}/>
 			<div>
-				{!topics || topics.length === 0 ? (
+				{!locatedTopics || locatedTopics.length === 0 ? (
 					<h2>Any topics!</h2>
 				) : (
-					topics.map((topic) => (
+					locatedTopics.map((topic) => (
 						<Topic key={topic} topic={topic} updateTopics={getTopics} />
 					))
 				)}

@@ -1,4 +1,3 @@
-import React from "react";
 import { isAuthenticated } from ".";
 import Cookies from "js-cookie";
 import axios from "axios";
