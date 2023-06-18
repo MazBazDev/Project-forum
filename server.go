@@ -84,8 +84,10 @@ func main() {
 
 		r.Get("/categories", categories.Index)
 
+		r.With(middlewares.SetPostCtx).Get("/post/{postId}", posts.Show)
+
 		// Private
-		r.Route("/", func(r chi.Router) {
+		r.Group(func(r chi.Router) {
 			r.Use(jwtauth.Verifier(models.TokenAuth))
 			r.Use(jwtauth.Authenticator)
 			r.Use(middlewares.SetUserMail)
@@ -98,9 +100,7 @@ func main() {
 
 				r.Route("/{postId}", func(r chi.Router) {
 					r.Use(middlewares.SetPostCtx)
-
-					r.Get("/", posts.Show)      // GET /articles/123
-					r.Delete("/", posts.Delete) // DELETE /articles/123
+					r.Delete("/", posts.Delete)
 				})
 			})
 

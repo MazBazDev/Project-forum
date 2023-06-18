@@ -56,7 +56,6 @@ func GetAllCategories() ([]models.Caterogy, error) {
 	if err != nil {
 		return []models.Caterogy{}, err
 	}
-	defer rows.Close()
 
 	for rows.Next() {
 		var caterogy models.Caterogy
@@ -65,6 +64,7 @@ func GetAllCategories() ([]models.Caterogy, error) {
 		if err != nil {
 			return []models.Caterogy{}, err
 		}
+		caterogy.Posts, _ = GetPostsByCategory(caterogy.Id)
 
 		categories = append(categories, caterogy)
 	}
@@ -96,7 +96,6 @@ func GetCategoriesByPostID(postID int) ([]models.Caterogy, error) {
 	if err != nil {
 		return []models.Caterogy{}, err
 	}
-	defer rows.Close()
 
 	for rows.Next() {
 		var category models.Caterogy
@@ -127,7 +126,6 @@ func GetPostsByCategory(categoryID int) ([]models.Post, error) {
 	if err != nil {
 		return []models.Post{}, err
 	}
-	defer rows.Close()
 
 	for rows.Next() {
 		var post models.Post

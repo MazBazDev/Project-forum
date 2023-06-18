@@ -25,9 +25,11 @@ type Credentials struct {
 }
 
 type Coordinates struct {
-	City string  `json:"city"`
-	Lat  float64 `json:"lat"`
-	Long float64 `json:"long"`
+	Id    string  `json:"id"`
+	City  string  `json:"city"`
+	Lat   float64 `json:"lat"`
+	Long  float64 `json:"long"`
+	Posts []Post  `json"posts,omitempty"`
 }
 
 type Posts struct {
@@ -64,4 +66,10 @@ type View struct {
 type Caterogy struct {
 	Id    int    `json:"id"`
 	Title string `json:"title"`
+	Posts []Post `json"posts,omitempty"`
+}
+
+type Searchable struct {
+	Users  []User `json:"users"`
+	Topics []Post `json:"topics"`
 }
