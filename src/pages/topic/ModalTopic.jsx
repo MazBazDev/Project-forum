@@ -16,7 +16,12 @@ const ModalTopic = ({ topicId, closeModal, updateTopics }) => {
 
 	useEffect(() => {
 		refreshTopicDatas();
+		viewTopic();
 	}, [])
+
+	function viewTopic() {
+		axios.post(`http://localhost:8080/api/posts/view/${topicId}`)
+	}
 
 	function refreshTopicDatas() {
 		axios.get(`http://localhost:8080/api/post/${topicId}`, {headers: { Authorization: `Bearer ${Cookies.get("token")}` }})

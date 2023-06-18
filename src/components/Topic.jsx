@@ -10,6 +10,7 @@ const Topic = ({ topic , updateTopics}) => {
   };
 
   const closeModal = () => {
+    updateTopics()
     setIsModalOpen(false);
   };
 
