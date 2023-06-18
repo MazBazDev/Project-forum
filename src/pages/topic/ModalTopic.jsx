@@ -76,6 +76,7 @@ const ModalTopic = ({ topicId, closeModal, updateTopics }) => {
 					<div dangerouslySetInnerHTML={{ __html: topic.content }} />
 					<UserProfile user={topic.user} />
 					<span> {moment(topic.created_at).fromNow()}</span>
+					<p>{topic.views} view(s)</p>
 					<p>Categories: </p>
 					{topic.categories != null && topic.categories.map((elem) => {
 						return <span>{elem.title}</span>

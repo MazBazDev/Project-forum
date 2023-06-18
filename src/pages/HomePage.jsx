@@ -3,9 +3,6 @@ import Layout from "../layouts.js";
 import NeedAuth from "../helpers.js";
 import CreateTopic from "./topic/CreateTopic.jsx";
 import axios from "axios";
-import Cookies from "js-cookie";
-import Notiflix from "notiflix";
-import { GetUser } from "../helpers";
 import Topic from "../../src/components/Topic";
 
 function HomePage() {
