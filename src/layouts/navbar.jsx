@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Cookies from 'js-cookie'
 import NeedAuth from '../helpers.js';
 
 class Navbar extends React.Component {
@@ -10,7 +9,6 @@ class Navbar extends React.Component {
         <ul>
           <li>
             <Link to="/">Home</Link>
-            {Cookies.get("token")}
           </li>
           
           <NeedAuth defaults={
