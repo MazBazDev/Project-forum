@@ -54,7 +54,7 @@ const Topics = () => {
       <h2>Any topics!</h2>
     ) : (
       topics.map((topic) => (
-        <Topic key={topic.id} topic={topic} onDelete={DeleteTopic} />
+        <Topic key={topic} topic={topic} onDelete={DeleteTopic} />
       ))
     )}
   </div>

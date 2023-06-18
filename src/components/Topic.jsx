@@ -26,7 +26,7 @@ const Topic = ({ topic , onDelete}) => {
 
   return (
     <>
-      {isModalOpen && <ModalTopic topic={topic} closeModal={closeModal} onDelete={onDelete}/>}
+      {isModalOpen && <ModalTopic topicId={topic.id} closeModal={closeModal} onDelete={onDelete}/>}
 
       <div onClick={openModal}>
         <hr
