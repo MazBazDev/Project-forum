@@ -83,7 +83,7 @@ const ModalTopic = ({ topicId, closeModal, updateTopics }) => {
 					})}
 					<p>Commentaires</p>
 					<CreateCommentModal updateTopic={refreshTopicDatas} topic_id={topicId}/>
-					
+
 					{topic.comments != null && topic.comments.map((elem) => {
 						return (
 							<Comment comment={elem} updateTopic={refreshTopicDatas}/>
