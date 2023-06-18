@@ -62,8 +62,6 @@ type View struct {
 }
 
 type Caterogy struct {
-	Id         int    `json:"id"`
-	Title      string `json:"title"`
-	Bg_color   string `json:"bg_color"`
-	Text_color string `json:"text_color"`
+	Id    int    `json:"id"`
+	Title string `json:"title"`
 }

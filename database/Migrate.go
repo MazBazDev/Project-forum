@@ -74,9 +74,7 @@ func Migrate() {
 
 	_, err = models.Database.Exec(`CREATE TABLE IF NOT EXISTS categories (
 		id integer NOT NULL PRIMARY KEY AUTOINCREMENT, 
-		title TEXT,
-		bg_color TEXT,
-		text_color TEXT
+		title TEXT
 	)`)
 
 	if err != nil {

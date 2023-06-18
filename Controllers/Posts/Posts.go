@@ -35,6 +35,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 
 func Create(w http.ResponseWriter, r *http.Request) {
 	var post models.Post
+
 	err := json.NewDecoder(r.Body).Decode(&post)
 	if err != nil {
 		http.Error(w, "Invalid request payload post", http.StatusBadRequest)
@@ -196,6 +197,13 @@ func GetAllPosts() (models.Posts, error) {
 		// Mettre à jour les détails du poste avec ceux obtenus de GetPostById
 		post = detailedPost
 
+		// Récupérer les catégories du post
+		categories, err := categories.GetCategoriesByPostID(post.Id)
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		post.Categories = categories
 		posts = append(posts, post)
 	}
 

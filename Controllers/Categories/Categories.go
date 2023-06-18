@@ -19,20 +19,15 @@ func Create(w http.ResponseWriter, r *http.Request) {
 
 	title := strings.Title(strings.ToLower(caterogy.Title))
 
-	_, err = models.Database.Exec("INSERT INTO categories (title, bg_color, text_color) VALUES (?, ?, ?)", title, caterogy.Bg_color, caterogy.Text_color)
+	resp, err := models.Database.Exec("INSERT INTO categories (title) VALUES (?)", title)
 	if err != nil {
 		http.Error(w, "Database insert error post insert", http.StatusInternalServerError)
 		return
 	}
 
-	categories, err := GetAllCategories()
+	id, _ := resp.LastInsertId()
 
-	if err != nil {
-		http.Error(w, http.StatusText(500), 500)
-		return
-	}
-
-	cateJSON, err := json.Marshal(categories)
+	cateJSON, err := json.Marshal(map[string]int64{"id": id})
 	if err != nil {
 		http.Error(w, http.StatusText(500), 500)
 		return
@@ -42,6 +37,15 @@ func Create(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(cateJSON)
 	w.WriteHeader(http.StatusOK)
+}
+
+func Index(w http.ResponseWriter, r *http.Request) {
+	cate, err := GetAllCategories()
+	if err != nil {
+		http.Error(w, http.StatusText(500), 500)
+	}
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(cate)
 }
 
 func GetAllCategories() ([]models.Caterogy, error) {
@@ -56,7 +60,7 @@ func GetAllCategories() ([]models.Caterogy, error) {
 
 	for rows.Next() {
 		var caterogy models.Caterogy
-		err := rows.Scan(&caterogy.Id, &caterogy.Title, &caterogy.Bg_color, &caterogy.Text_color)
+		err := rows.Scan(&caterogy.Id, &caterogy.Title)
 
 		if err != nil {
 			return []models.Caterogy{}, err
@@ -82,7 +86,7 @@ func GetCategoriesByPostID(postID int) ([]models.Caterogy, error) {
 	var categories []models.Caterogy
 
 	query := `
-		SELECT c.id, c.title, c.bg_color, c.text_color
+		SELECT c.id, c.title
 		FROM categories c
 		INNER JOIN categories_post cp ON c.id = cp.categorie_id
 		WHERE cp.post_id = ?
@@ -96,7 +100,7 @@ func GetCategoriesByPostID(postID int) ([]models.Caterogy, error) {
 
 	for rows.Next() {
 		var category models.Caterogy
-		err := rows.Scan(&category.Id, &category.Title, &category.Bg_color, &category.Text_color)
+		err := rows.Scan(&category.Id, &category.Title)
 
 		if err != nil {
 			return []models.Caterogy{}, err
@@ -104,7 +108,6 @@ func GetCategoriesByPostID(postID int) ([]models.Caterogy, error) {
 
 		categories = append(categories, category)
 	}
-	fmt.Println("hohoho", categories)
 	return categories, nil
 }
 

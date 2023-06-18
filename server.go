@@ -82,6 +82,8 @@ func main() {
 			r.Post("/view/{postId}", posts.View)
 		})
 
+		r.Get("/categories", categories.Index)
+
 		// Private
 		r.Route("/", func(r chi.Router) {
 			r.Use(jwtauth.Verifier(models.TokenAuth))
@@ -102,9 +104,7 @@ func main() {
 				})
 			})
 
-			r.Route("/categories", func(r chi.Router) {
-				r.Post("/create", categories.Create)
-			})
+			r.Post("/categories/create", categories.Create)
 
 			r.Route("/comment", func(r chi.Router) {
 				r.Post("/", comments.Create)
