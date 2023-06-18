@@ -94,6 +94,7 @@ func main() {
 
 			// Profile datas
 			r.Get("/me", controllers.Me)
+			r.Post("/me", controllers.Update)
 
 			r.Route("/post", func(r chi.Router) {
 				r.Post("/", posts.Create)
