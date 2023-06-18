@@ -64,6 +64,7 @@ export default function CreateCommentModal({updateTopic, topic_id}) {
             onRequestClose={closeModal}
         >
             <form onSubmit={handleSubmit}>
+                <h1>Create a comment</h1>
                 <Editor
                     onInit={(evt, editor) => (editorRef.current = editor)}
                     initialValue=""

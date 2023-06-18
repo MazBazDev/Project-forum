@@ -8,12 +8,11 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import CreateCommentModal from "./CreateCommentModal";
 import Comment from "../../components/Comment";
+import Notiflix from "notiflix";
 
-const ModalTopic = ({ topicId, closeModal, onDelete }) => {
+const ModalTopic = ({ topicId, closeModal, updateTopics }) => {
 	const [topic, setTopic] = useState([]);
 	const [isOppen, setIsOppen] = useState(false)
-
-	
 
 	useEffect(() => {
 		refreshTopicDatas();
@@ -29,9 +28,29 @@ const ModalTopic = ({ topicId, closeModal, onDelete }) => {
 
 	const DeleteTopic = () => {
 		if (topic.user.id == GetUser().id) {
-      function Delete() {
-        return onDelete(topic)
-      }
+			function Delete() {
+				Notiflix.Confirm.show(
+					"Delete this topic?",
+					"Are you sure you want to delete this topic, this action is irreversible!",
+					"Yes",
+					"No",
+					() => {
+						axios
+							.delete(`http://localhost:8080/api/post/${topic.id}`, {
+								headers: { Authorization: `Bearer ${Cookies.get("token")}` },
+							})
+							.then((response) => {
+								Notiflix.Notify.success(`Topic deleted !`);
+								updateTopics()
+								setIsOppen(false)
+							})
+							.catch((error) => {
+								Notiflix.Notify.failure(error.response.data);
+							});
+					},
+					{}
+				);
+			}
 			return <button onClick={Delete}>Delete topic</button>;
 		}
 	};
@@ -53,11 +72,11 @@ const ModalTopic = ({ topicId, closeModal, onDelete }) => {
 					<UserProfile user={topic.user} />
 					<span> {moment(topic.created_at).fromNow()}</span>
 					<p>Categories: </p>
-					{topic.categories.map((elem) => {
-						return <span>{elem.title}</span>;
+					{topic.categories != null && topic.categories.map((elem) => {
+						return <span>{elem.title}</span>
 					})}
 					<p>Commentaires</p>
-					{topic.comments.map((elem) => {
+					{topic.comment != null && topic.comments.map((elem) => {
 						return (
 							<Comment comment={elem} updateTopic={refreshTopicDatas}/>
 						);

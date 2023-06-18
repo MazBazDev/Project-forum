@@ -26,34 +26,6 @@ function HomePage() {
 			});
 	};
 
-	const DeleteTopic = (topic) => {
-		if (topic.user.id == GetUser().id) {
-			Notiflix.Confirm.show(
-				"Delete this topic?",
-				"Are you sure you want to delete this topic, this action is irreversible!",
-				"Yes",
-				"No",
-				() => {
-					axios
-						.delete(`http://localhost:8080/api/post/${topic.id}`, {
-							headers: { Authorization: `Bearer ${Cookies.get("token")}` },
-						})
-						.then((response) => {
-							Notiflix.Notify.success(`Topic deleted !`);
-
-							setTopics((prevTopics) =>
-								prevTopics.filter((atopic) => atopic.id !== topic.id)
-							);
-						})
-						.catch((error) => {
-							Notiflix.Notify.failure(error.response.data);
-						});
-				},
-				{}
-			);
-		}
-	};
-
 	return (
 		<Layout>
 			<h1>Home Page</h1>
@@ -67,7 +39,7 @@ function HomePage() {
 					<h2>Any topics!</h2>
 				) : (
 					topics.map((topic) => (
-						<Topic key={topic} topic={topic} onDelete={DeleteTopic} />
+						<Topic key={topic} topic={topic} updateTopics={getTopics} />
 					))
 				)}
 			</div>

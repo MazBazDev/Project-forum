@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import ModalTopic from "../pages/topic/ModalTopic";
-import { ProcessContent } from "../helpers";
-const Topic = ({ topic , onDelete}) => {
+import { ProcessContent, truncateString } from "../helpers";
+const Topic = ({ topic , updateTopics}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -26,7 +26,7 @@ const Topic = ({ topic , onDelete}) => {
 
   return (
     <>
-      {isModalOpen && <ModalTopic topicId={topic.id} closeModal={closeModal} onDelete={onDelete}/>}
+      {isModalOpen && <ModalTopic topicId={topic.id} closeModal={closeModal} updateTopics={updateTopics}/>}
 
       <div onClick={openModal}>
         <hr
@@ -41,10 +41,11 @@ const Topic = ({ topic , onDelete}) => {
           <p>
             {topic.coordinates.city} - {topic.title}
           </p>
-          <p>{ProcessContent(topic.content)}</p>
+          <p>{truncateString(ProcessContent(topic.content), 90)}</p>
           <p>
             {topic.comments === null ? 0 : topic.comments.length} comment(s)
           </p>
+          <p>{topic.views} view(s)</p>
           <p>
             <a>
               <img
