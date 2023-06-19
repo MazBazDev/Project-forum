@@ -9,7 +9,7 @@ import Filters from "../components/Filters.jsx";
 
 function HomePage() {
 	const [topics, setTopics] = useState([]);
-	const [locatedTopics, setLocatedTopics] = useState([])
+	const [locatedTopics, setLocatedTopics] = useState([]);
 
 	useEffect(() => {
 		getTopics();
@@ -26,27 +26,59 @@ function HomePage() {
 			});
 	};
 
+	function goToLogin() {
+		window.location.href = "/login";
+	}
+
 	return (
 		<Layout>
-			<h1>Home Page</h1>
-			<NeedAuth
-				auth={<CreateTopic updateTopics={getTopics} />}
-				defaults={<a href="/login">You need to be logged</a>}
-			/>
-			<MapComponent topics={topics} locatedTopics={locatedTopics} setLocatedTopics={setLocatedTopics} />
-			<div>
-				{!locatedTopics || locatedTopics.length === 0 ? (
-					<h2>Any topics!</h2>
-				) : (
-					<>
-					<Filters locatedTopics={locatedTopics} setLocatedTopics={setLocatedTopics}/>
-					{
-						locatedTopics.map((topic) => (
-							<Topic key={topic} topic={topic} updateTopics={getTopics} />
-						))
-					}
-					</>
-				)}
+			<div class="home">
+				<div id="container-createtopic">
+					<NeedAuth
+						auth={<CreateTopic updateTopics={getTopics} />}
+						defaults={
+							<button onClick={goToLogin} class="create-new-topic">
+								You need to be logged to create a topic :)
+							</button>
+						}
+					/>
+				</div>
+				<div id="container-allhome">
+					<div id="container-partileft">
+						<div>
+							<MapComponent
+								topics={topics}
+								locatedTopics={locatedTopics}
+								setLocatedTopics={setLocatedTopics}
+							/>
+						</div>
+					</div>
+					<div id="container-partiright">
+						<div id="container-topics">
+							<div id="container-titletopics">
+								<div class="titletopics">Topics at the location</div>
+							</div>
+							<div id="container-alltopics">
+								{!locatedTopics || locatedTopics.length === 0 ? (
+									<h2>Any topics!</h2>
+								) : (
+									<>
+										<div className="filters">
+											<Filters
+												class="filters"
+												locatedTopics={locatedTopics}
+												setLocatedTopics={setLocatedTopics}
+											/>
+										</div>
+										{locatedTopics.map((topic) => (
+											<Topic key={topic} topic={topic} updateTopics={getTopics} />
+										))}
+									</>
+								)}
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</Layout>
 	);

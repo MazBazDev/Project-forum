@@ -24,7 +24,7 @@ export default function CreateTopic({updateTopics}) {
     return (
         <>
             {isModalOpen && <CreateTopicModal onClose={closeModal} isModalOpen={isModalOpen}/>}
-            <button onClick={openModal}>Create Topic</button>
+            <button class="create-new-topic" onClick={openModal}>CREATE A NEW TOPIC</button>
         </>
       );
 }

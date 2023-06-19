@@ -13,23 +13,26 @@ import Likes from "../../components/Like";
 
 const ModalTopic = ({ topicId, closeModal, updateTopics }) => {
 	const [topic, setTopic] = useState([]);
-	const [isOppen, setIsOppen] = useState(false)
+	const [isOppen, setIsOppen] = useState(false);
 
 	useEffect(() => {
 		refreshTopicDatas();
 		viewTopic();
-	}, [])
+	}, []);
 
 	function viewTopic() {
-		axios.post(`http://localhost:8080/api/posts/view/${topicId}`)
+		axios.post(`http://localhost:8080/api/posts/view/${topicId}`);
 	}
 
 	function refreshTopicDatas() {
-		axios.get(`http://localhost:8080/api/post/${topicId}`, {headers: { Authorization: `Bearer ${Cookies.get("token")}` }})
-		.then((response) => {
-			setTopic(response.data);
-			setIsOppen(true); // Mettre à jour l'état isOppen ici
-		})
+		axios
+			.get(`http://localhost:8080/api/post/${topicId}`, {
+				headers: { Authorization: `Bearer ${Cookies.get("token")}` },
+			})
+			.then((response) => {
+				setTopic(response.data);
+				setIsOppen(true); // Mettre à jour l'état isOppen ici
+			});
 	}
 
 	const DeleteTopic = () => {
@@ -47,8 +50,8 @@ const ModalTopic = ({ topicId, closeModal, updateTopics }) => {
 							})
 							.then((response) => {
 								Notiflix.Notify.success(`Topic deleted !`);
-								updateTopics()
-								setIsOppen(false)
+								updateTopics();
+								setIsOppen(false);
 							})
 							.catch((error) => {
 								Notiflix.Notify.failure(error.response.data);
@@ -60,7 +63,7 @@ const ModalTopic = ({ topicId, closeModal, updateTopics }) => {
 			return <button onClick={Delete}>Delete topic</button>;
 		}
 	};
- 
+
 	return (
 		<ReactModal
 			isOpen={isOppen}
@@ -72,26 +75,64 @@ const ModalTopic = ({ topicId, closeModal, updateTopics }) => {
 		>
 			{isOppen && ( // Vérifier si isOppen est vrai avant de rendre le contenu du modal
 				<>
-					<p>{`Topic numéro : ${topic.id}`}</p>
-					<NeedAuth auth={<DeleteTopic />} />
-					<div dangerouslySetInnerHTML={{ __html: topic.content }} />
-					<UserProfile user={topic.user} />
-					<span> {moment(topic.created_at).fromNow()}</span>
-					<p>{topic.views} view(s)</p>
-					<Likes topic={topic} setTopic={setTopic}/>
-					<p>Categories: </p>
-					{topic.categories != null && topic.categories.map((elem) => {
-						return <span>{elem.title}</span>
-					})}
-					<p>Commentaires</p>
-					<CreateCommentModal updateTopic={refreshTopicDatas} topic_id={topicId}/>
+					<div id="container-all">
+						<div id="container-buttonback">
+							<div id="container-back">
+								<i class="fa-solid fa-chevron-left fa-sm"></i>
 
-					{topic.comments != null && topic.comments.map((elem) => {
-						return (
-							<Comment comment={elem} updateTopic={refreshTopicDatas}/>
-						);
-					})}
+								<div class="textback" onClick={closeModal}>
+									Back
+								</div>
+							</div>
+						</div>
+						<h1 style={{ textAlign: "center" }}>{topic.title}</h1>
+						<div id="container-alltopics">
 
+							<div id="container-principaltopic">
+								<div id="container-textprincipaltopic">
+									<div
+										class="textprincipaltopic"
+										dangerouslySetInnerHTML={{ __html: topic.content }}
+									/>
+								</div>
+								<div id="container-footerreply">
+									<div id="footer-leftprincipaltopic">
+										<UserProfile user={topic.user} />
+										<div class="barre">|</div>
+										<div class="date">{moment(topic.created_at).fromNow()}</div>
+										<div class="barre">|</div>
+										<div class="date">{topic.views != null ? topic.views.length : 0} view(s)</div>
+										<div class="barre">|</div>
+										<div class="date">{topic.likes != null ? topic.likes.length : 0} likes(s)</div>
+										<div class="barre">|</div>
+										<div class="date">
+											{topic.categories != null &&
+												topic.categories.map((elem) => {
+													return <span> {elem.title}</span>;
+												})}
+										</div>
+									</div>
+									<div id="footer-rightprincipaltopic">
+										<div id="container-heart">
+											<Likes topic={topic} setTopic={setTopic} />
+										</div>
+										<div id="container-icon">
+											<CreateCommentModal
+												updateTopic={refreshTopicDatas}
+												topic_id={topicId}
+											/>
+										</div>
+									</div>
+								</div>
+							</div>
+							{topic.comments != null &&
+								topic.comments.map((elem) => {
+									return (
+										<Comment comment={elem} updateTopic={refreshTopicDatas} />
+									);
+								})}
+						</div>
+					</div>
 				</>
 			)}
 		</ReactModal>

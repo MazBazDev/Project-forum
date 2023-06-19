@@ -20,7 +20,7 @@ export default function Comment({ comment, updateTopic }) {
 					})
 					.then((response) => {
 						Notiflix.Notify.success(`Comment deleted !`);
-                        updateTopic()
+						updateTopic();
 					})
 					.catch((error) => {
 						Notiflix.Notify.failure(error.response.data);
@@ -31,14 +31,23 @@ export default function Comment({ comment, updateTopic }) {
 	}
 	return (
 		<>
-			<hr />
-			<div dangerouslySetInnerHTML={{ __html: comment.content }} />
-			{comment.user.id == GetUser().id ? (
-				<button onClick={deleteComment}>delete</button>
-			) : ("")}
-			<br />
-			<UserProfile user={comment.user} />
-			<span> | {comment.coordinates.city } | {moment(comment.created_at).fromNow()}</span>
+			<div id="container-secondtopic">
+				<div id="container-textprincipaltopic">
+					<div
+						class="textprincipaltopic"
+						dangerouslySetInnerHTML={{ __html: comment.content }}
+					/>
+				</div>
+				<div id="container-footerreply">
+					<div id="footer-leftprincipaltopic">
+						<UserProfile user={comment.user} />
+						<div class="barre">|</div>
+						<div class="date">{comment.coordinates.city}</div>
+						<div class="barre">|</div>
+						<div class="date">{moment(comment.created_at).fromNow()}</div>
+					</div>
+				</div>
+			</div>
 		</>
 	);
 }

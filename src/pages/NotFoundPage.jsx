@@ -1,15 +1,17 @@
-import React from 'react';
-import Layout from '../layouts.js';
-
+import React from "react";
+import "./css/notfound.css"
 class NotFoundPage extends React.Component {
-  render() {
-    return (
-      <Layout>
-        <h1>404 - Page not found</h1>
-        <p>The requested page could not be found.</p>
-      </Layout>
-    );
-  }
+	render() {
+		return (
+			<div className="notFound">
+				<h1>404</h1>
+				<p>Oops! Something is wrong.</p>
+				<a class="notFoundbutton" href="/">
+					<i class="icon-home"></i> Go back in initial page, is better.
+				</a>
+			</div>
+		);
+	}
 }
 
 export default NotFoundPage;

@@ -22,14 +22,6 @@ export default function Likes({ topic, setTopic }) {
 	}
 
 	return (
-		<>
-			<p>{topic.likes != null ? topic.likes.length : 0} likes</p>
-			<button
-				style={{ backgroundColor: userHasLiked ? "red" : "transparent" }}
-				onClick={handleLike}
-			>
-				Like !
-			</button>
-		</>
+		<i onClick={handleLike} style={{ color: userHasLiked ? "red" : "black" }} class="fa-regular fa-heart fa-xl" id="heart"></i>
 	);
 }

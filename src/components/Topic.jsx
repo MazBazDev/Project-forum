@@ -29,39 +29,35 @@ const Topic = ({ topic , updateTopics}) => {
     <>
       {isModalOpen && <ModalTopic topicId={topic.id} closeModal={closeModal} updateTopics={updateTopics}/>}
 
-      <div onClick={openModal}>
-        <hr
-          style={{
-            color: "#000000",
-            backgroundColor: "#000000",
-            height: 0.5,
-            borderColor: "#000000",
-          }}
-        />
-        <div key={topic.id}>
-          <p>
-            {topic.coordinates.city} - {topic.title}
-          </p>
-          <p>{truncateString(ProcessContent(topic.content), 90)}</p>
-          <p>
-            {topic.comments === null ? 0 : topic.comments.length} comment(s)
-          </p>
-          <p>{topic.views} view(s)</p>
-          <p>{topic.likes === null ? 0 : topic.likes.length} likes(s)</p>
-          {topic.categories != null  && topic.categories.map((elem) => {
-            return <span>{elem.title}</span>
-          })}
-          <p>
-            <img
-                style={{ width: "50px" }}
-                src={topic.user.profile_picture}
-                alt="User Profile"
-              />
-              {topic.user.username}
-            | {timeAgo}
-          </p>
-        </div>
-      </div>
+        <div id="container-principaltopic" onClick={openModal}>
+						<div id="container-headerprincipaltopic">
+							<div id="container-rightheader">
+								<div class="rightheader">{topic.coordinates.city} - {topic.title}</div>
+							</div>
+							<div id="container-leftheader">
+								<i class="fa-regular fa-comments fa-xl"></i>
+								<div class="nb">{topic.comments === null ? 0 : topic.comments.length}</div>
+							</div>
+						</div>
+						<div id="container-textprincipaltopic">
+							<div class="textprincipaltopic">
+              {truncateString(ProcessContent(topic.content), 90)}
+							</div>
+						</div>
+						<div id="container-footerreply">
+							<div id="footer-leftprincipaltopic">
+								<a id="container-user">
+									<img
+										src={topic.user.profile_picture}
+										class="imgprofilfooter"
+									/>
+									<div class="username">{topic.user.username}</div>
+								</a>
+								<div class="barre">| </div>
+								<div class="date">{moment(topic.created_at).fromNow()}</div>
+							</div>
+						</div>
+				</div>
     </>
   );
 };

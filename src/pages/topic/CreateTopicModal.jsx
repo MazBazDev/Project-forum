@@ -79,30 +79,36 @@ export default function CreateTopicModal({ onClose, isModalOpen }) {
     <ReactModal isOpen={true} ariaHideApp={false} shouldFocusAfterRender={true} preventScroll={true} onRequestClose={onClose}>
       <form onSubmit={handleSubmit}>
         <h1>Create topic</h1>
-        <Input label="Title" id="title" placeholder="Title" name="title" onChange={handleTitleChange} value={title} />
+        <br />
+        <div id="container-input">
+							<div class="title-input">Title</div>
+              <Input id="title" placeholder="Title" name="title" className={"input-pseudo"} onChange={handleTitleChange} value={title} />
+        <br />
+        <br />
+
+        </div>
         <Editor
           onInit={(evt, editor) => (editorRef.current = editor)}
           initialValue=""
           init={{
             height: 500,
             menubar: false,
-            plugins: [
-              "advlist autolink lists link image charmap print preview anchor",
-              "searchreplace visualblocks code fullscreen",
-              "insertdatetime media table paste code help wordcount",
-            ],
-            toolbar:
-              "undo redo | formatselect | " +
-              "bold italic backcolor | alignleft aligncenter " +
-              "alignright alignjustify | bullist numlist outdent indent | " +
-              "removeformat | help",
+            plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
+            menubar: 'file edit view insert format tools table help',
+            toolbar: 'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
             content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+            toolbar_sticky: true,
           }}
         />
+        <br />
+        <p>Categories</p>
         <CategoriesInput selectedCategories={selectedCategories} onChange={handleCategoryChange} />
-        <button type="submit" disabled={!canSubmit}>
-          Create topic!
-        </button>
+        <br />
+        <button class="button" type="submit" disabled={!canSubmit}>
+								<div class="text-button">
+                Create topic!
+								</div>
+					</button>
       </form>
     </ReactModal>
   );

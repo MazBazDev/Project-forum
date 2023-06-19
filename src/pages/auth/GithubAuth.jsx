@@ -12,9 +12,7 @@ export default function HandleGithubLogin() {
   }
 
   return (
-    <div>
-      <button onClick={redirect}>Se connecter avec GitHub</button>
-    </div>
+		<div class="textgithub" onClick={redirect}>CONNECT WITH GITHUB</div>
   );
 }
 

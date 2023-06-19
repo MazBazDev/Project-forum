@@ -54,8 +54,8 @@ ReactDOM.render(
     <Router>
       <Routes>
         <Route path="*" element={<NotFoundPage />} />
-        <Route path="/" element={<HomePage />} />
 
+        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<OnlyPublicRoute element={<LoginPage />} />}/>
         <Route path="/register" element={<OnlyPublicRoute element={<RegisterPage />} />} />
         <Route path="/callback-github" element={<GithubCallback/>} />
@@ -66,5 +66,6 @@ ReactDOM.render(
     </Router>
   </React.StrictMode>,
   document.getElementById('root')
+
 );
 

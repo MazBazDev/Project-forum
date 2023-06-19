@@ -12,9 +12,7 @@ export default function HandleDiscordLogin() {
     } 
 
     return (
-        <div>
-          <button onClick={redirect}>Se connecter avec Discord</button>
-        </div>
+        <div class="textgithub" onClick={redirect}>CONNECT WITH DISCORD</div>
     );
 }
 

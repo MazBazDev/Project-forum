@@ -4,8 +4,9 @@ import Input from "../../components/Input";
 import axios from "axios";
 import Cookies from "js-cookie";
 import Notiflix from "notiflix";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import HandleGithubLogin from "./GithubAuth.jsx";
+import HandleDiscordLogin from "./DiscordAuth.jsx";
 
 export default function RegisterPage() {
 	const navigate = useNavigate();
@@ -51,37 +52,81 @@ export default function RegisterPage() {
 	}
 	return (
 		<Layout>
-			<h1>Register</h1>
-			<HandleGithubLogin/>
-			<form onSubmit={handleSubmit}>
-                <Input
-					type="text"
-					label="Username"
-					placeholder="UserName"
-					value={datas.username}
-					onChange={handleChangeUsername}
-					name="username"
-				/>
-				<Input
-					type="text"
-					label="Email"
-					placeholder="email@email.com"
-					value={datas.email}
-					onChange={handleChangeEmail}
-					name="email"
-				/>
-
-				<Input
-					type="password"
-					label="Password"
-					placeholder="Enter your password"
-					value={datas.pswd}
-					onChange={handleChangePassword}
-					name="pswd"
-				/>
-
-				<button type="submit">Register</button>
-			</form>
+			<div id="container-allcreate">
+				<div id="container-create">
+					<div id="container-textcreate">
+						<div id="title-create">
+							<div class="create">REGISTER</div>
+						</div>
+						<div id="container-input">
+							<div class="title-input">Username</div>
+							<Input
+								type="text"
+								placeholder="UserName"
+								value={datas.username}
+								onChange={handleChangeUsername}
+								name="username"
+								className={"input-pseudo"}
+							/>
+						</div>
+						<div id="container-input">
+							<div class="title-input">E-mail</div>
+							<Input
+								type="text"
+								placeholder="email@email.com"
+								value={datas.email}
+								onChange={handleChangeEmail}
+								name="email"
+								className={"input-pseudo"}
+							/>
+						</div>
+						<div id="container-input">
+							<div class="title-input">Password</div>
+							<Input
+								type="password"
+								placeholder="Enter your password"
+								value={datas.pswd}
+								onChange={handleChangePassword}
+								name="pswd"
+								className={"input-pseudo"}
+							/>
+						</div>
+						<div id="container-button">
+							<button class="button">
+								<div class="text-button" onClick={handleSubmit}>
+									REGISTER
+								</div>
+							</button>
+						</div>
+						<div id="container-buttoncreate">
+							<div class="textcreate">
+								<Link to="/login">Already have an account ?</Link>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="container-bar">
+					<div class="bar"></div>
+				</div>
+				<div id="container-othercreate">
+					<div id="container-creategithub">
+						<div id="container-imggithub">
+							<i class="fa-brands fa-github fa-2xl"></i>
+						</div>
+						<div id="container-textgithub">
+							<HandleGithubLogin />
+						</div>
+					</div>
+					<div id="container-creategithub">
+						<div id="container-imggithub">
+							<i class="fa-brands fa-discord fa-2xl"></i>
+						</div>
+						<div id="container-textgithub">
+							<HandleDiscordLogin />
+						</div>
+					</div>
+				</div>
+			</div>
 		</Layout>
 	);
 }

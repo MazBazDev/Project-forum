@@ -11,6 +11,7 @@ class Input extends Component {
                     value={this.props.value}
                     onChange={this.props.onChange}
                     name={this.props.name}
+                    className={this.props.className}
                 />
             </>
         )
