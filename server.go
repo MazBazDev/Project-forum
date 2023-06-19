@@ -74,7 +74,8 @@ func main() {
 		r.Route("/auth", func(r chi.Router) {
 			r.Post("/register", controllers.Register)
 			r.Post("/login", controllers.Login)
-			r.Post("/github", controllers.Github)
+			r.Post("/github", controllers.GithubCallback)
+			r.Post("/discord", controllers.DiscordCallback)
 		})
 
 		// Non authentifié
