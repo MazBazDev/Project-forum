@@ -5,6 +5,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import Notiflix from "notiflix";
 import { useNavigate } from "react-router-dom";
+import HandleGithubLogin from "./GithubAuth.jsx";
 
 export default function RegisterPage() {
 	const navigate = useNavigate();
@@ -51,6 +52,7 @@ export default function RegisterPage() {
 	return (
 		<Layout>
 			<h1>Register</h1>
+			<HandleGithubLogin/>
 			<form onSubmit={handleSubmit}>
                 <Input
 					type="text"

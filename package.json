@@ -12,6 +12,7 @@
     "js-cookie": "^3.0.5",
     "moment": "^2.29.4",
     "notiflix": "^3.2.6",
+    "qs": "^6.11.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-modal": "^3.16.1",

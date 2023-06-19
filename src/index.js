@@ -8,6 +8,7 @@ import RegisterPage from './pages/auth/RegisterPage';
 import Cookies from 'js-cookie';
 import Notiflix from 'notiflix';
 import CreateTopicPage from './pages/topic/CreateTopicModal';
+import { Callback, GithubCallback } from './pages/auth/GithubAuth';
 
 export const isAuthenticated = () => {
   const token = Cookies.get("token");
@@ -56,6 +57,7 @@ ReactDOM.render(
 
         <Route path="/login" element={<OnlyPublicRoute element={<LoginPage />} />}/>
         <Route path="/register" element={<OnlyPublicRoute element={<RegisterPage />} />} />
+        <Route path="/callback" element={<GithubCallback/>} />
 
         <Route path="/logout" element={<Logout/>} />
       </Routes>
