@@ -6,6 +6,7 @@ import Cookies from 'js-cookie'
 import Notiflix from 'notiflix';
 import { useNavigate } from "react-router-dom";
 import HandleGithubLogin from "./GithubAuth.jsx";
+import HandleDiscordLogin from "./DiscordAuth.jsx";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -48,7 +49,7 @@ export default function LoginPage() {
     <Layout>
       <h1>LoginPage</h1>
 			<HandleGithubLogin/>
-      
+      <HandleDiscordLogin/>
       <form onSubmit={handleSubmit}>
         <Input
           type="text"

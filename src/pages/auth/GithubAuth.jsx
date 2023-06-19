@@ -7,7 +7,7 @@ import Notiflix from "notiflix";
 export default function HandleGithubLogin() {
   function redirect() {
     const clientId = "d8136884ff4675d74c9a";
-    const redirectUri = "http://localhost:3000/callback";
+    const redirectUri = "http://localhost:3000/callback-github";
     window.location.href = `https://github.com/login/oauth/authorize?scope=user:email&client_id=${clientId}&redirect_uri=${redirectUri}`;
   }
 
