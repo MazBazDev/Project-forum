@@ -8,6 +8,7 @@ import (
 	models "main/Models"
 	"net/http"
 	"net/url"
+	"os"
 	"strings"
 )
 
@@ -86,14 +87,13 @@ func Register(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(response)
 }
 
-const (
-	GithubClientID     = "d8136884ff4675d74c9a"
-	GithubClientSecret = "40da0ab806fe534843d58d174f1401b5cf24412c"
-	GithubRedirectURI  = "http://localhost:3000/callback-github"
-
-	DiscordClientID     = "1120336930433925240"
-	DiscordClientSecret = "1g7ZwcOYgVXC7-jGul3GJ6qILTbDky2B"
-	DiscordRedirectURI  = "http://localhost:3000/callback-discord"
+var (
+	GithubClientID      = os.Getenv("GithubClientID")
+	GithubClientSecret  = os.Getenv("GithubClientSecret")
+	GithubRedirectURI   = os.Getenv("GithubRedirectURI")
+	DiscordClientID     = os.Getenv("DiscordClientID")
+	DiscordClientSecret = os.Getenv("DiscordClientSecret")
+	DiscordRedirectURI  = os.Getenv("DiscordRedirectURI")
 )
 
 type GithubTokenResponse struct {
