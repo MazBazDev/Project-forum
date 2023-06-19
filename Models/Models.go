@@ -46,6 +46,13 @@ type Post struct {
 	Coordinates Coordinates `json:"coordinates"`
 	Comments    []Comment   `json:"comments"`
 	Views       int         `json:"views"`
+	Likes       []Like      `json:"likes"`
+}
+
+type Like struct {
+	Id     int `json:"id"`
+	UserId int `json:"user"`
+	PostId int `json:"post"`
 }
 
 type Comment struct {

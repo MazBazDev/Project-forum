@@ -156,6 +156,17 @@ func GetPostById(id int) (models.Post, error) {
 
 	post.Categories = categories
 
+	// Récupérer les likes du post
+	likes, err := GetLikesByPostID(id)
+
+	if err != nil {
+		fmt.Println("Controllers > posts ", err)
+
+		return post, err
+	}
+
+	post.Likes = likes
+
 	return post, nil
 }
 
@@ -242,4 +253,86 @@ func View(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
+}
+
+func Like(w http.ResponseWriter, r *http.Request) {
+	// Récupérer l'ID du post à liker depuis les paramètres de l'URL
+	postID := chi.URLParam(r, "postId")
+	id, _ := strconv.Atoi(postID)
+
+	// Vérifier si l'utilisateur a déjà liké le post
+	var count int
+	err := models.Database.QueryRow("SELECT COUNT(*) FROM likes WHERE post_id = ? AND user_id = ?", id, models.ThisUser.Id).Scan(&count)
+	if err != nil {
+		http.Error(w, "Database select error", http.StatusInternalServerError)
+		return
+	}
+
+	if count > 0 {
+		// L'utilisateur a déjà liké le post, donc on retire le like de la base de données
+		_, err = models.Database.Exec("DELETE FROM likes WHERE post_id = ? AND user_id = ?", id, models.ThisUser.Id)
+		if err != nil {
+			http.Error(w, "Database delete error", http.StatusInternalServerError)
+			return
+		}
+
+		post, _ := GetPostById(id)
+
+		postJSON, err := json.Marshal(post)
+		if err != nil {
+			http.Error(w, http.StatusText(500), 500)
+			return
+		}
+		// Renvoyer une réponse OK
+		w.Header().Set("Content-Type", "application/json")
+		w.Write(postJSON)
+		w.WriteHeader(http.StatusOK)
+		return
+	}
+
+	// Insérer le like dans la base de données
+	_, err = models.Database.Exec("INSERT INTO likes (post_id, user_id) VALUES (?, ?)", id, models.ThisUser.Id)
+	if err != nil {
+		http.Error(w, "Database insert error", http.StatusInternalServerError)
+		return
+	}
+
+	post, _ := GetPostById(id)
+
+	postJSON, err := json.Marshal(post)
+	if err != nil {
+		http.Error(w, http.StatusText(500), 500)
+		return
+	}
+	// Renvoyer une réponse OK
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(postJSON)
+	w.WriteHeader(http.StatusOK)
+}
+
+func GetLikesByPostID(postID int) ([]models.Like, error) {
+	query := `
+		SELECT id, user_id FROM likes WHERE post_id = ?
+	`
+	rows, err := models.Database.Query(query, postID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	likes := []models.Like{}
+	for rows.Next() {
+		like := models.Like{}
+		err := rows.Scan(&like.Id, &like.UserId)
+		if err != nil {
+			return nil, err
+		}
+		likes = append(likes, like)
+	}
+
+	if err = rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return likes, nil
 }

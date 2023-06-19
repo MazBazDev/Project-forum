@@ -104,6 +104,7 @@ func main() {
 				r.Route("/{postId}", func(r chi.Router) {
 					r.Use(middlewares.SetPostCtx)
 					r.Delete("/", posts.Delete)
+					r.Post("/like", posts.Like)
 				})
 			})
 

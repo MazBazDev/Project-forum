@@ -92,4 +92,16 @@ func Migrate() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	_, err = models.Database.Exec(`CREATE TABLE IF NOT EXISTS likes (
+		id integer NOT NULL PRIMARY KEY AUTOINCREMENT, 
+		post_id integer NOT NULL,
+		user_id integer NOT NULL,
+		FOREIGN KEY (post_id) REFERENCES posts (id),
+		FOREIGN KEY (user_id) REFERENCES users (id)
+	)`)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 }
