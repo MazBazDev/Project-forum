@@ -9,6 +9,7 @@ import Cookies from "js-cookie";
 import CreateCommentModal from "./CreateCommentModal";
 import Comment from "../../components/Comment";
 import Notiflix from "notiflix";
+import Likes from "../../components/Like";
 
 const ModalTopic = ({ topicId, closeModal, updateTopics }) => {
 	const [topic, setTopic] = useState([]);
@@ -77,6 +78,7 @@ const ModalTopic = ({ topicId, closeModal, updateTopics }) => {
 					<UserProfile user={topic.user} />
 					<span> {moment(topic.created_at).fromNow()}</span>
 					<p>{topic.views} view(s)</p>
+					<Likes topic={topic} setTopic={setTopic}/>
 					<p>Categories: </p>
 					{topic.categories != null && topic.categories.map((elem) => {
 						return <span>{elem.title}</span>

@@ -47,6 +47,7 @@ const Topic = ({ topic , updateTopics}) => {
             {topic.comments === null ? 0 : topic.comments.length} comment(s)
           </p>
           <p>{topic.views} view(s)</p>
+          <p>{topic.likes === null ? 0 : topic.likes.length} likes(s)</p>
           {topic.categories != null  && topic.categories.map((elem) => {
             return <span>{elem.title}</span>
           })}
