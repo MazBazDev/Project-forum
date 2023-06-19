@@ -5,6 +5,7 @@ import CreateTopic from "./topic/CreateTopic.jsx";
 import axios from "axios";
 import Topic from "../../src/components/Topic";
 import MapComponent from "../components/MapComponent.jsx";
+import Filters from "../components/Filters.jsx";
 
 function HomePage() {
 	const [topics, setTopics] = useState([]);
@@ -32,14 +33,19 @@ function HomePage() {
 				auth={<CreateTopic updateTopics={getTopics} />}
 				defaults={<a href="/login">You need to be logged</a>}
 			/>
-			<MapComponent topics={topics} setLocatedTopics={setLocatedTopics} locatedTopics={locatedTopics}/>
+			<MapComponent topics={topics} locatedTopics={locatedTopics} setLocatedTopics={setLocatedTopics} />
 			<div>
 				{!locatedTopics || locatedTopics.length === 0 ? (
 					<h2>Any topics!</h2>
 				) : (
-					locatedTopics.map((topic) => (
-						<Topic key={topic} topic={topic} updateTopics={getTopics} />
-					))
+					<>
+					<Filters locatedTopics={locatedTopics} setLocatedTopics={setLocatedTopics}/>
+					{
+						locatedTopics.map((topic) => (
+							<Topic key={topic} topic={topic} updateTopics={getTopics} />
+						))
+					}
+					</>
 				)}
 			</div>
 		</Layout>

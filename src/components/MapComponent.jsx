@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import env from "../env";
-import { getUserCoordinates } from "../helpers";
 
 const MapComponent = ({ topics, setLocatedTopics }) => {
   const [bounds, setBounds] = useState();
@@ -51,7 +50,7 @@ const MapComponent = ({ topics, setLocatedTopics }) => {
   }, []);
 
   const updateLocatedTopics = () => {
-    if (bounds) {
+    if (bounds && topics != null) {
       const locatedTopics = topics.filter((topic) =>
         bounds.contains({
           lat: topic.coordinates.lat,
