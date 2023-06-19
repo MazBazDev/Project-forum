@@ -9,7 +9,7 @@ func Migrate() {
 	var err error
 	_, err = models.Database.Exec(`CREATE TABLE IF NOT EXISTS users (
 		id integer NOT NULL PRIMARY KEY AUTOINCREMENT, 
-		email TEXT,
+		email TEXT UNIQUE NOT NULL,
 		password TEXT,
 		username TEXT,
 		profile_picture TEXT DEFAULT "https://visitemaroc.ca/wp-content/uploads/2021/06/profile-placeholder.png"

@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"database/sql"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -87,15 +88,6 @@ func Register(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(response)
 }
 
-var (
-	GithubClientID      = os.Getenv("GithubClientID")
-	GithubClientSecret  = os.Getenv("GithubClientSecret")
-	GithubRedirectURI   = os.Getenv("GithubRedirectURI")
-	DiscordClientID     = os.Getenv("DiscordClientID")
-	DiscordClientSecret = os.Getenv("DiscordClientSecret")
-	DiscordRedirectURI  = os.Getenv("DiscordRedirectURI")
-)
-
 type GithubTokenResponse struct {
 	AccessToken string `json:"access_token"`
 	TokenType   string `json:"token_type"`
@@ -142,15 +134,6 @@ func GithubCallback(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println("Github -----------")
-
-	fmt.Println("Access Token:", token.AccessToken)
-	fmt.Println("Token Type:", token.TokenType)
-	fmt.Println("Scope:", token.Scope)
-
-	fmt.Println("Login:", userData.UserName)
-	fmt.Println("Avatar URL:", userData.AvatarURL)
-	fmt.Println("Email:", userData.Email)
 
 	authUser(w, r, models.User{
 		Email:          userData.Email,
@@ -179,14 +162,6 @@ func DiscordCallback(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println("Discord -----------")
-	fmt.Println("Access Token:", token.AccessToken)
-	fmt.Println("Token Type:", token.TokenType)
-	fmt.Println("Scope:", token.Scope)
-
-	fmt.Println("Email:", userData.Email)
-	fmt.Println("Profile Image:", userData.ProfileImage)
-	fmt.Println("Username:", userData.Username)
 
 	authUser(w, r, models.User{
 		Email:          userData.Email,
@@ -197,10 +172,10 @@ func DiscordCallback(w http.ResponseWriter, r *http.Request) {
 
 func exchangeGithubCodeForToken(code string) (GithubTokenResponse, error) {
 	data := url.Values{
-		"client_id":     {GithubClientID},
-		"client_secret": {GithubClientSecret},
+		"client_id":     {os.Getenv("GithubClientID")},
+		"client_secret": {os.Getenv("GithubClientSecret")},
 		"code":          {code},
-		"redirect_uri":  {GithubRedirectURI},
+		"redirect_uri":  {os.Getenv("GithubRedirectURI")},
 		"grant_type":    {"authorization_code"},
 		"scope":         {"user:email"},
 	}
@@ -260,15 +235,58 @@ func getGithubUserData(accessToken string) (GithubUserData, error) {
 		return GithubUserData{}, fmt.Errorf("error decoding JSON: %v", err)
 	}
 
+	// Récupérer l'e-mail principal depuis l'API /user/emails
+	emailsURL := "https://api.github.com/user/emails"
+
+	emailsReq, err := http.NewRequest("GET", emailsURL, nil)
+	if err != nil {
+		return GithubUserData{}, fmt.Errorf("error creating request for /user/emails: %v", err)
+	}
+
+	emailsReq.Header.Set("Authorization", "Bearer "+accessToken)
+
+	emailsResp, err := client.Do(emailsReq)
+	if err != nil {
+		return GithubUserData{}, fmt.Errorf("error sending request for /user/emails: %v", err)
+	}
+	defer emailsResp.Body.Close()
+
+	emailsBody, err := ioutil.ReadAll(emailsResp.Body)
+	if err != nil {
+		return GithubUserData{}, fmt.Errorf("error reading response for /user/emails: %v", err)
+	}
+
+	var emails []struct {
+		Email    string `json:"email"`
+		Primary  bool   `json:"primary"`
+		Verified bool   `json:"verified"`
+	}
+	err = json.Unmarshal(emailsBody, &emails)
+	if err != nil {
+		return GithubUserData{}, fmt.Errorf("error decoding JSON for /user/emails: %v", err)
+	}
+
+	// Trouver l'e-mail principal dans la liste des e-mails
+	var primaryEmail string
+	for _, email := range emails {
+		if email.Primary {
+			primaryEmail = email.Email
+			break
+		}
+	}
+
+	// Ajouter l'e-mail principal à la structure de données de l'utilisateur GitHub
+	userData.Email = primaryEmail
+
 	return userData, nil
 }
 
 func exchangeDiscordCodeForToken(code string) (DiscordTokenResponse, error) {
 	data := url.Values{
-		"client_id":     {DiscordClientID},
-		"client_secret": {DiscordClientSecret},
+		"client_id":     {os.Getenv("DiscordClientID")},
+		"client_secret": {os.Getenv("DiscordClientSecret")},
 		"code":          {code},
-		"redirect_uri":  {DiscordRedirectURI},
+		"redirect_uri":  {os.Getenv("DiscordRedirectURI")},
 		"grant_type":    {"authorization_code"},
 		"scope":         {"identify", "email"},
 	}
@@ -327,7 +345,6 @@ func getDiscordUserData(accessToken string) (DiscordUserData, error) {
 	if err != nil {
 		return DiscordUserData{}, fmt.Errorf("error decoding JSON: %v", err)
 	}
-	// fmt.Println("discord body: ----q--s-s-d-d- =", (userData))
 
 	userData.ProfileImage = "https://cdn.discordapp.com/avatars/" + userData.Id + "/" + userData.Avatar + ".png"
 
@@ -335,22 +352,37 @@ func getDiscordUserData(accessToken string) (DiscordUserData, error) {
 }
 
 func authUser(w http.ResponseWriter, r *http.Request, userData models.User) {
-
 	var user models.User
-	err := models.Database.QueryRow("SELECT * FROM users WHERE email = ?", userData.Email).Scan(&user.Id, &user.Email, &user.Username, &user.ProfilePicture)
+	err := models.Database.QueryRow("SELECT id, email, username, profile_picture FROM users WHERE email = ?", userData.Email).Scan(&user.Id, &user.Email, &user.Username, &user.ProfilePicture)
 	if err != nil {
-		// User does not exist, perform registration
-		user = models.User{
-			Email:          userData.Email,
-			Username:       userData.Username,
-			ProfilePicture: userData.ProfilePicture,
-		}
+		// Erreur lors de la recherche de l'utilisateur dans la base de données
+		if err == sql.ErrNoRows {
+			// L'utilisateur n'existe pas, effectuer l'inscription
 
-		// Insert new user
-		_, err = models.Database.Exec("INSERT INTO users (email, username, profile_picture) VALUES (?, ?, ?)",
-			user.Email, user.Username, user.ProfilePicture)
-		if err != nil {
-			http.Error(w, "Database insert error", http.StatusInternalServerError)
+			user = models.User{
+				Email:          userData.Email,
+				Username:       userData.Username,
+				ProfilePicture: userData.ProfilePicture,
+			}
+
+			// Insérer un nouvel utilisateur
+			_, err = models.Database.Exec("INSERT INTO users (email, username, profile_picture) VALUES (?, ?, ?)",
+				user.Email, user.Username, user.ProfilePicture)
+			if err != nil {
+
+				// Gérer l'erreur d'insertion dans la base de données
+				if strings.Contains(err.Error(), "UNIQUE constraint failed") {
+					// L'email existe déjà, gérer le cas approprié
+					http.Error(w, "User already exists", http.StatusBadRequest)
+					return
+				}
+
+				http.Error(w, "Database insert error", http.StatusInternalServerError)
+				return
+			}
+		} else {
+			// Autre erreur lors de la recherche de l'utilisateur
+			http.Error(w, "Database query error", http.StatusInternalServerError)
 			return
 		}
 	}
