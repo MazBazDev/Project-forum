@@ -20,7 +20,8 @@ export const ProcessContent = (content) => {
 };
 
 export const GetUser = () => {
-	return JSON.parse(Cookies.get("user"));
+  const user = Cookies.get("user");
+  return user ? JSON.parse(user) : null;
 };
 
 export const getUserCoordinates = async () => {
