@@ -29,7 +29,9 @@ class Navbar extends React.Component {
 				<NeedAuth auth={
 					<div id="container-buttonprofil">
 						<div className="butonprofil">
+						{GetUser() && GetUser().profile_picture && (
 							<Profile src={GetUser().profile_picture} />
+						)}
 						</div>
 					</div>
 				}/>
